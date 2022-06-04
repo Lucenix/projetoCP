@@ -33,7 +33,7 @@ anaLTree3 f = inLTree3 . (recLTree3 (anaLTree3 f) ) . f
 hyloLTree3 f g = cataLTree3 f . anaLTree3 g
 
 -- (3) geraSierp + folhasSierp + sierpinski
-geraSierp :: (Tri,Int) → LTree3 Tri
+geraSierp :: (Tri,Int) -> LTree3 Tri
 geraSierp = anaLTree3 g2
     where
         g2 = (either (!) (id >< pred)) . (cond ((== 0) . p2) p2 id)
@@ -43,6 +43,6 @@ folhasSierp = cataLTree3 g1
     where
         g1 = either nil (uncurry (++) . (id >< (uncurry (++))))
 
-sierpinski :: (Tri,Int) → [Tri]
+sierpinski :: (Tri,Int) -> [Tri]
 sierpinski = folhasSierp · geraSierp
 ---------------------------- end of library ----------------------------------
