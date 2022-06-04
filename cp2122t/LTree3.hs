@@ -16,9 +16,9 @@ data LTree3 a = Tri a | Nodo (LTree3 a) (LTree3 a) (LTree3) deriving (Show, Eq, 
 inLTree3 :: Either a (LTree3 a,(LTree3 a,LTree3 a)) -> LTree3 a
 inLTree3 = either Tri Nodo
 
-outLTree3 :: LTree3 a -> Either a (LTree3 a LTree3 a LTree3 a)
+outLTree3 :: LTree3 a -> Either a (LTree3 a, (LTree3 a,LTree3 a))
 outLTree3 (Tri a)       = i1 a
-outLTree3 (Nodo t1 t2 t3) = i2 (t1,t2,t3)
+outLTree3 (Nodo t1 t2 t3) = i2 (t1,(t2,t3))
 
 baseLTree3 g f = g -|- (f >< (f >< f))
 
