@@ -13,7 +13,7 @@ type Tri = (Point, Side)
 
 data LTree3 a = Tri a | Nodo (LTree3 a) (LTree3 a) (LTree3) deriving (Show, Eq, Ord)
 
-inLTree3 :: Either a (LTree3 a,LTree3 a,LTree3 a) -> LTree3 a
+inLTree3 :: Either a (LTree3 a,(LTree3 a,LTree3 a)) -> LTree3 a
 inLTree3 = either Tri Nodo
 
 outLTree3 :: LTree3 a -> Either a (LTree3 a LTree3 a LTree3 a)
@@ -36,11 +36,13 @@ hyloLTree3 f g = cataLTree3 f . anaLTree3 g
 geraSierp :: (Tri,Int) → LTree3 Tri
 geraSierp = anaLTree3 g2
     where
-        g2 = 
+        g2 = (either (!) (id >< pred)) . (cond ((== 0) . p2) p2 id)
 
 folhasSierp :: LTree3 Tri -> [Tri]
 folhasSierp = cataLTree3 g1
     where
         g1 = either nil (uncurry (++) . (id >< (uncurry (++))))
 
+sierpinski :: (Tri,Int) → [Tri]
+sierpinski = folhasSierp · geraSierp
 ---------------------------- end of library ----------------------------------
