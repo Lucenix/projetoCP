@@ -44,5 +44,5 @@ folhasSierp = cataLTree3 g1
         g1 = either nil (uncurry (++) . (id >< (uncurry (++))))
 
 sierpinski :: (Tri,Int) -> [Tri]
-sierpinski = folhasSierp · geraSierp
+sierpinski = folhasSierp . geraSierp
 ---------------------------- end of library ----------------------------------
