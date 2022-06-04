@@ -37,5 +37,5 @@ t2 = Fork (
 res2 = (39,70)
 
 
-both :: LTree a -> (Integer, Integer)
+both :: LTree Integer -> (Integer, Integer)
 both x = cataLTree (split (either id (uncurry max.(p2 >< p2))) (either id (uncurry min.(p1 >< p1)))) x
