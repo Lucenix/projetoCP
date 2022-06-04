@@ -11,7 +11,7 @@ type Point = (Int, Int)
 type Side = Int
 type Tri = (Point, Side)
 
-data LTree3 a = Tri a | Nodo (LTree3 a) (LTree3 a) (LTree3) deriving (Show, Eq, Ord)
+data LTree3 a = Tri a | Nodo (LTree3 a) (LTree3 a) (LTree3 a) deriving (Show, Eq, Ord)
 
 inLTree3 :: Either a (LTree3 a,(LTree3 a,LTree3 a)) -> LTree3 a
 inLTree3 = either Tri Nodo
