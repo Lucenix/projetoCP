@@ -24,7 +24,7 @@ baseLTree3 g f = g -|- ((f >< f) >< f)
 
 -- (2) Ana + cata + hylo -------------------------------------------------------
 
-recLTree3 f = baseLTree3 id f          -- that is:  id -|- (f >< (f >< f))
+recLTree3 f = baseLTree3 id f          -- that is:  id -|- ((f >< f) >< f)
 
 cataLTree3 g = g . (recLTree3 (cataLTree3 g)) . outLTree3
 
@@ -36,7 +36,11 @@ hyloLTree3 f g = cataLTree3 f . anaLTree3 g
 geraSierp :: (Tri,Int) -> LTree3 Tri
 geraSierp = anaLTree3 g2
     where
-        g2 = (either (!) (id >< pred)) . (cond ((== 0) . p2) (p2) (id))
+        g2 (t,0) = i1 t
+        g2 (((x,y),s),n) = i2 ((t1,t2),t3) where
+            t1 = (((x,y), s `div` 2), n-1)
+            t2 = (((x+ s `div` 2,y), s `div` 2), n-1)
+            t3 = (((x,y+ s `div` 2), s `div` 2), n-1)
 
 folhasSierp :: LTree3 Tri -> [Tri]
 folhasSierp = cataLTree3 g1
