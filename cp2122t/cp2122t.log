@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.3) (preloaded format=pdflatex 2022.6.1)  4 JUN 2022 15:10
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.3) (preloaded format=pdflatex 2022.6.1)  5 JUN 2022 13:29
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -11,3 +11,18 @@ l.1 \^^@
         d^^@o^^@c^^@u^^@m^^@e^^@n^^@t^^@c^^@l^^@a^^@s^^@s^^@[^^@a^^@4^^@p^^@...
 
 ? 
+! Emergency stop.
+l.1 
+    
+End of file on the terminal!
+
+ 
+Here is how much of TeX's memory you used:
+ 18 strings out of 478582
+ 418 string characters out of 2844345
+ 288951 words of memory out of 3000000
+ 18305 multiletter control sequences out of 15000+600000
+ 469259 words of font info for 28 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 13i,0n,12p,109b,10s stack positions out of 10000i,1000n,20000p,200000b,80000s
+!  ==> Fatal error occurred, no output PDF file produced!
