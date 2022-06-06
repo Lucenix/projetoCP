@@ -153,13 +153,11 @@
 \begin{tabular}{ll}
 \textbf{Grupo} nr. & 99 (preencher)
 \\\hline
-a11111 & Nome1 (preencher)
+a94956 & André Lucena Ribas Ferreira
 \\
 a22222 & Nome2 (preencher)
 \\
 a33333 & Nome3 (preencher)
-\\
-a44444 & Nome4 (preencher, se aplicável, ou apagar)
 \end{tabular}
 \end{center}
 
@@ -934,24 +932,59 @@ g2 (((x,y),s),n+1) = i2((t1,t2),t3) where
 
 \subsection*{Problema 4}
 
+A função propagate deve aplicar |f :: Monad m => (t -> m a)| a todos os elementos da lista de entrada, tal como um |map|, 
+enquanto coleta todos os resultados monádicos de forma a que se agrupem numa única estrutura 
+monádica aplicada a uma lista, ao invés de uma lista de estruturas do mesmo tipo de saída de |f|.
+Então, para se definir a função |propagate| é necessário definir o seu comportamento com a função |f|.
+Renomeie-se os tipos das funções tais que |t == A| e |a == B|.
+Assim, para definir corretamente a função |propagate f| é necessário conhecer qual o gene do seu catamorfismo, 
+uma função que obtenha |M B^{*}| a partir de |1 + A \times M B^{*}|. 
+Por um lado, a função |f| obtém |M B| a partir do elemento da cabeça da lista |A|, chegando então a |1 + M B \times M B^{*}|.
+Por outro lado, pretendemos concatenar o resultado |B|, retirando-lhe o mónade momentaneamente, 
+ao resultado de aplicar a chamada recursiva à cauda, nomeadamente a função |g1| que retira do mónade os elementos do par
+e devolve a concatenação no mónade, utilizando |return|.
+Ambas estes passos podem ser compostos na função |g2|, definida na solução, que aplica |f| ao elemento à cabeça antes de o concatenar.
+No caso do elemento vir do tipo |1|, o que corresponde à lista vazia, o gene deve criar uma estrutura monádica com a lista vazia, 
+isto é, aplicar |return| após |nil| ao elemento |()|.
+\begin{eqnarray*}
+\xymatrix@@C=2cm{
+    A^{*}
+           \ar[d]_-{|(propagate f)|}
+&
+    1 + A \times A^{*}
+           \ar[d]^{|id + id \times (propagate f)|}
+           \ar[l]_-{|inList|}
+\\
+     M B^{*}
+&
+     1 + A \times M B^{*}
+            \ar[l]^{|either (return . nil) (g2 f)|}
+           \ar[d]^{id + f \times id}
+\\
+&
+    1 + M B \times M B^{*}
+            \ar[ul]^{|either (return . nil) (g1)|}
+}
+\end{eqnarray*}
+
 \begin{code}
 propagate :: Monad m => (t -> m a) -> [t] -> m [a]
 propagate f = cataList (g f) where
-   g f = either undefined (g2 f)
-   g2 f (a,b) = undefined
+   g f = either (return . nil) (g2 f)
+   g2 f (a,b) = do {x <- (fa); y <- b; return (x:y)}
 \end{code}
 
 \begin{code}
 propagate3 :: (Monad m) => (Bit3 -> m Bit3) -> [Bit] -> m [Bit]
 propagate3 f = cataList (g f) where
-   g f = either undefined (g2 f)
-   g2 f (a,b) = undefined
+   g f = either (return . nil) (g2 f)
+   g2 f (a,b) = do {x <- ((fmap . v3) . f) (a,a,a); y <- b; return (x:y)}
 \end{code}
 A função |bflip3|, a programar a seguir, deverá estender |bflip| aos três bits da entrada:
 
 \begin{code}
 bflip3 :: Bit3 -> Dist Bit3
-bflip3(a,b,c) = do { undefined } 
+bflip3(a,b,c) = do { x <- bflip a; y <- bflip b; z <- bflip c; return (x,y,z) } 
 
 \end{code}
 
