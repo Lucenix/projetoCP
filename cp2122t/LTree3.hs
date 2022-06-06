@@ -49,4 +49,15 @@ folhasSierp = cataLTree3 g1
 
 sierpinski :: (Tri,Int) -> [Tri]
 sierpinski = folhasSierp . geraSierp
+
+-- Correr código
+
+type Svg = String
+tri2svg :: Tri -> Svg
+tri2svg (p, c) = (red . polyg) [p, p .+ (0, c), p .+ (c, 0)]
+
+base = ((0, 0), 32)
+
+desenha x = picd'' [scale 0.44 (0, 0) (x >>= tri2svg)]
+
 ---------------------------- end of library ----------------------------------
