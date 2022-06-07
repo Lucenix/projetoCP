@@ -904,30 +904,33 @@ both = undefined
 Biblioteca |LTree3|:
 
 \begin{code}
-inLTree3 = undefined
+inLTree3 :: Either a ((LTree3 a,LTree3 a),LTree3 a) -> LTree3 a
+inLTree3 = either Tri (uncurry (uncurry Nodo))
 
-outLTree3 (Tri t) = undefined
-outLTree3 (Nodo a b c) =  undefined
+outLTree3 :: LTree3 a -> Either a ((LTree3 a, LTree3 a),LTree3 a)
+outLTree3 (Tri t) = i1 a
+outLTree3 (Nodo a b c) =  i2 ((a, b), c)
 
-baseLTree3 f g = undefined
+baseLTree3 f g = f -|- ((g >< g) >< g)
 
-recLTree3 f = undefined
+recLTree3 f = baseLTree3 id f -- ou seja, id -|- ((f >< f) >< f)
 
-cataLTree3 f = undefined
+cataLTree3 f = f . (recLTree3 (cataLTree3 f)) . outLTree3
 
-anaLTree3 f = undefined
+anaLTree3 f = inLTree3 . (recLTree3 (anaLTree3 f) ) . f
 
-hyloLTree3 f g = undefined
+hyloLTree3 f g = cataLTree3 f . anaLTree3 g
+
 \end{code}
 Genes do hilomorfismo |sierpinski|:
 \begin{code}
-g1 = undefined
+g1 = either nil (uncurry (++) . ((uncurry (++) >< id)))
 
-g2 (t,0) = undefined
+g2 (t,0) = i1 t
 g2 (((x,y),s),n+1) = i2((t1,t2),t3) where
-     t1 = undefined
-     t2 = undefined
-     t3 = undefined
+     t1 = (((x,y), s `div` 2), n-1)
+     t2 = (((x+ s `div` 2,y), s `div` 2), n-1)
+     t3 = (((x,y+ s `div` 2), s `div` 2), n-1)
 \end{code}
 
 \subsection*{Problema 4}
