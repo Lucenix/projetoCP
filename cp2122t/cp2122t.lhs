@@ -932,8 +932,8 @@ g2 (((x,y),s),n+1) = i2((t1,t2),t3) where
 
 \subsection*{Problema 4}
 
-A função propagate deve aplicar |f :: Monad m => (t -> m a)| a todos os elementos da lista de entrada, tal como um |map|, 
-enquanto coleta todos os resultados monádicos de forma a que se agrupem numa única estrutura 
+A função |propagate| deve aplicar |f :: Monad m => (t -> m a)| a todos os elementos da lista de entrada, tal como um |map|, 
+enquanto coleta todos os resultados monádicos, de forma tal que se agrupem numa única estrutura 
 monádica aplicada a uma lista, ao invés de uma lista de estruturas do mesmo tipo de saída de |f|.
 Então, para se definir a função |propagate| é necessário definir o seu comportamento com a função |f|.
 Renomeie-se os tipos das funções tais que |t == A| e |a == B|.
@@ -943,42 +943,87 @@ Por um lado, a função |f| obtém |M B| a partir do elemento da cabeça da list
 Por outro lado, pretendemos concatenar o resultado |B|, retirando-lhe o mónade momentaneamente, 
 ao resultado de aplicar a chamada recursiva à cauda, nomeadamente a função |g1| que retira do mónade os elementos do par
 e devolve a concatenação no mónade, utilizando |return|.
-Ambas estes passos podem ser compostos na função |g2|, definida na solução, que aplica |f| ao elemento à cabeça antes de o concatenar.
-No caso do elemento vir do tipo |1|, o que corresponde à lista vazia, o gene deve criar uma estrutura monádica com a lista vazia, 
+
+\begin{code}
+g1 :: Monad m => (m a, m [a]) -> m [a]
+g1 (a,b) = do {x <- a; y <- b; return (x:y)}
+\end{code}
+
+Ambas estes passos podem ser compostos na função |g2|, definida na solução, que aplica |f| ao elemento à cabeça antes de o concatenar, por absorção.
+
+\begin{eqnarray*}
+\start
+     |g2 = (either (return . nil) (g1)) . (id + f \times id)|
+%
+\just\equiv{(22); (1)}
+%
+     |g2 = either (return . nil) (g1 . (f \times id))|
+\qed
+\end{eqnarray*}
+
+\begin{eqnarray*}
+\start
+     |(g1 . (f \times id)) (a,b)|
+%
+\just ={(72); (77); (1)}
+%
+     |(g1) (f a, b)|
+\qed
+\end{eqnarray*}
+
+No caso do elemento pertencer ao tipo |1|, o que corresponde à lista vazia, o gene deve criar uma estrutura monádica com a lista vazia, 
 isto é, aplicar |return| após |nil| ao elemento |()|.
+
 \begin{eqnarray*}
 \xymatrix@@C=2cm{
     A^{*}
-           \ar[d]_-{|(propagate f)|}
+          \ar[d]_-{|(propagate f)|}
 &
     1 + A \times A^{*}
-           \ar[d]^{|id + id \times (propagate f)|}
-           \ar[l]_-{|inList|}
+          \ar[d]^{|id + id \times (propagate f)|}
+          \ar[l]_-{|inList|}
 \\
      M B^{*}
 &
      1 + A \times M B^{*}
-            \ar[l]^{|either (return . nil) (g2 f)|}
-           \ar[d]^{id + f \times id}
+          \ar[l]^{|either (return . nil) (g2 f)|}
+          \ar[d]^{id + f \times id}
 \\
 &
     1 + M B \times M B^{*}
-            \ar[ul]^{|either (return . nil) (g1)|}
+          \ar[ul]^{|either (return . nil) (g1)|}
 }
 \end{eqnarray*}
+
+Definição de |propagate|:
 
 \begin{code}
 propagate :: Monad m => (t -> m a) -> [t] -> m [a]
 propagate f = cataList (g f) where
    g f = either (return . nil) (g2 f)
-   g2 f (a,b) = do {x <- (fa); y <- b; return (x:y)}
+   g2 f (a,b) = do {x <- (f a); y <- b; return (x:y)}
 \end{code}
+
+Para se definir |propagate3|, é necessário explicitar os tipos de |f :: (Monad m) => (Bit3 -> m Bit3)|, 
+já que se pretende que |propagate3| triplique cada |Bit| da lista de entrada para uma estrutura do tipo |Bit3|.
+A sequência de aplicações do gene, que manipulam a cabeça da lista, é a seguinte:
+
+\begin{enumerate}
+\item Construir o triplo |Bit3| a partir de |Bit|, replicando-o três vezes.
+\item Aplicar |f| (especificamente |bflip3|) a |Bit3|, produzindo |m Bit3|.
+\item Reduzir |m Bit3| a |m Bit|, utilizando a função |v3 :: Bit3 -> Bit| estendida para se 
+aplicar a |m Bit3| com o |functor| desse mónade, através de |fmap|.
+\item Reconstruir |m [Bit]| de forma análoga a |propagate|, através de
+|either (return . nil) (g1 f)|.
+\end{enumerate}
+
+Tal com anteriormente, todos estes passos podem ser compostos numa só função por sucessivas aplicações da regra de |absorção-+|.
 
 \begin{code}
 propagate3 :: (Monad m) => (Bit3 -> m Bit3) -> [Bit] -> m [Bit]
 propagate3 f = cataList (g f) where
    g f = either (return . nil) (g2 f)
-   g2 f (a,b) = do {x <- ((fmap . v3) . f) (a,a,a); y <- b; return (x:y)}
+   g2 f (a,b) = do {x <- ((fmap v3) . f) (a,a,a); y <- b; return (x:y)}
 \end{code}
 A função |bflip3|, a programar a seguir, deverá estender |bflip| aos três bits da entrada:
 
