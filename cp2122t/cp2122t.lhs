@@ -1022,6 +1022,41 @@ aplicar a |m Bit3| com o |functor| desse mónade, através de |fmap|.
 
 Tal com anteriormente, todos estes passos podem ser compostos numa só função por sucessivas aplicações da regra de |absorção-+|.
 
+\begin{eqnarray*}
+\xymatrix@@C=2cm{
+    |Bit^{*}|
+           \ar[d]_-{|cataNat (propagate3 f)|}
+&
+    |1 + Bit \times Bit^{*}|
+           \ar[d]^{|id + id \times cataNat (propagate3 f)|}
+           \ar[l]_-{|inList|}
+\\
+     |M Bit^{*}|
+&
+     |1 + Bit \times M Bit^{*}|
+            \ar[l]^{|either (return . nil) (g2 f)|}
+           \ar[d]^{id + f \times id}
+\\
+&
+    |1 + Bit3 \times M Bit^{*}|
+        \ar[d]^{id + (a,a,a) \times id}
+\\
+&
+    |1 + M Bit3 \times M Bit^{*}|
+        \ar[d]^{id + bitflip3 \times id}
+\\
+&
+    |1 + M Bit \times M Bit^{*}|
+        \ar[d]^{id + bitflip3 \times id}
+\\
+&
+    |1 + M Bit \times M Bit^{*}|
+            \ar[uuuul]^{|either (return . nil) (g1)|}
+}
+\end{eqnarray*}
+
+Definição de |propagate3|:
+
 \begin{code}
 propagate3 :: (Monad m) => (Bit3 -> m Bit3) -> [Bit] -> m [Bit]
 propagate3 f = cataList (g f) where
