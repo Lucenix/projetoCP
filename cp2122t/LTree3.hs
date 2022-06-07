@@ -3,6 +3,7 @@ module LTree3 where
 
 import Cp
 import Data.Monoid
+import Svg
 import Control.Applicative
 import List
 
@@ -56,6 +57,7 @@ type Svg = String
 tri2svg :: Tri -> Svg
 tri2svg (p, c) = (red . polyg) [p, p .+ (0, c), p .+ (c, 0)]
 
+base :: Tri
 base = ((0, 0), 32)
 
 desenha x = picd'' [scale 0.44 (0, 0) (x >>= tri2svg)]
