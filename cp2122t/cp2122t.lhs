@@ -910,12 +910,12 @@ inLTree3 :: Either a ((LTree3 a,LTree3 a),LTree3 a) -> LTree3 a
 inLTree3 = either Tri (uncurry (uncurry Nodo))
 
 outLTree3 :: LTree3 a -> Either a ((LTree3 a, LTree3 a),LTree3 a)
-outLTree3 (Tri t) = i1 a
+outLTree3 (Tri t) = i1 t
 outLTree3 (Nodo a b c) =  i2 ((a, b), c)
 
 baseLTree3 f g = f -|- ((g >< g) >< g)
 
-recLTree3 f = baseLTree3 id f -- ou seja, id -|- ((f >< f) >< f)
+recLTree3 f = baseLTree3 id f
 
 cataLTree3 f = f . (recLTree3 (cataLTree3 f)) . outLTree3
 
@@ -946,12 +946,12 @@ Assim, para definir corretamente a função |propagate f| é necessário conhece
 uma função que obtenha |M B^{*}| a partir de |1 + A \times M B^{*}|. 
 Por um lado, a função |f| obtém |M B| a partir do elemento da cabeça da lista |A|, chegando então a |1 + M B \times M B^{*}|.
 Por outro lado, pretendemos concatenar o resultado |B|, retirando-lhe o mónade momentaneamente, 
-ao resultado de aplicar a chamada recursiva à cauda, nomeadamente a função |g1| que retira do mónade os elementos do par
+ao resultado de aplicar a chamada recursiva à cauda, nomeadamente a função |monad_cons| que retira do mónade os elementos do par
 e devolve a concatenação no mónade, utilizando |return|.
 
 \begin{code}
-g1 :: Monad m => (m a, m [a]) -> m [a]
-g1 (a,b) = do {x <- a; y <- b; return (x:y)}
+monad_cons :: Monad m => (m a, m [a]) -> m [a]
+monad_cons (a,b) = do {x <- a; y <- b; return (x:y)}
 \end{code}
 
 Ambas estes passos podem ser compostos na função |g2|, definida na solução, que aplica |f| ao elemento à cabeça antes de o concatenar, por absorção.
