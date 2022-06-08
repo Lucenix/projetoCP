@@ -885,6 +885,8 @@ simples e elegantes.
 
 \subsection*{Problema 1} \label{pg:P1}
 
+
+
 Apresentar cálculos aqui, se desejável acompanhados de diagramas, etc.
 
 \subsection*{Problema 2}
@@ -938,7 +940,7 @@ g2 (((x,y),s),n+1) = i2((t1,t2),t3) where
 A função |propagate| deve aplicar |f :: Monad m => (t -> m a)| a todos os elementos da lista de entrada, tal como um |map|, 
 enquanto coleta todos os resultados monádicos, de forma tal que se agrupem numa única estrutura 
 monádica aplicada a uma lista, ao invés de uma lista de estruturas do mesmo tipo de saída de |f|.
-Então, para se definir a função |propagate| é necessário definir o seu comportamento com a função |f|.
+Então, para se definir a função |propagate| é necessário definir o seu comportamento, depois de receber a função |f|.
 Renomeie-se os tipos das funções tais que |t == A| e |a == B|.
 Assim, para definir corretamente a função |propagate f| é necessário conhecer qual o gene do seu catamorfismo, 
 uma função que obtenha |M B^{*}| a partir de |1 + A \times M B^{*}|. 
@@ -1035,23 +1037,19 @@ Tal com anteriormente, todos estes passos podem ser compostos numa só função 
 &
      |1 + Bit \times M Bit^{*}|
             \ar[l]^{|either (return . nil) (g2 f)|}
-           \ar[d]^{id + f \times id}
+           \ar[d]^{id + (a,a,a) \times id}
 \\
 &
     |1 + Bit3 \times M Bit^{*}|
-        \ar[d]^{id + (a,a,a) \times id}
+        \ar[d]^{id + bitflip3 \times id}
 \\
 &
     |1 + M Bit3 \times M Bit^{*}|
-        \ar[d]^{id + bitflip3 \times id}
+        \ar[d]^{id + (fmap v3) \times id}
 \\
 &
     |1 + M Bit \times M Bit^{*}|
-        \ar[d]^{id + bitflip3 \times id}
-\\
-&
-    |1 + M Bit \times M Bit^{*}|
-            \ar[uuuul]^{|either (return . nil) (g1)|}
+            \ar[uuul]^{|either (return . nil) (g1)|}
 }
 \end{eqnarray*}
 
