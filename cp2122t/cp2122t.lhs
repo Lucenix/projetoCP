@@ -903,6 +903,7 @@ both = undefined
 \end{code}
 
 \subsection*{Problema 3}
+
 Biblioteca |LTree3|:
 
 \begin{code}
@@ -926,14 +927,31 @@ hyloLTree3 f g = cataLTree3 f . anaLTree3 g
 \end{code}
 Genes do hilomorfismo |sierpinski|:
 \begin{code}
-g1 = either nil (uncurry (++) . ((uncurry (++) >< id)))
+g1 = either singl (uncurry (++) . ((uncurry (++) >< id)))
 
 g2 (t,0) = i1 t
-g2 (((x,y),s),n+1) = i2((t1,t2),t3) where
-     t1 = (((x,y), s `div` 2), n-1)
-     t2 = (((x+ s `div` 2,y), s `div` 2), n-1)
-     t3 = (((x,y+ s `div` 2), s `div` 2), n-1)
+g2 (((x,y),s),n) = i2 ((t1,t2),t3) where
+    t1 = (((x,y), s `div` 2), n-1)
+    t2 = (((x+ s `div` 2,y), s `div` 2), n-1)
+    t3 = (((x,y+ s `div` 2), s `div` 2), n-1)
 \end{code}
+
+\begin{eqnarray*}
+\xymatrix@@C=2cm{
+    |LTree3 Tri|
+           \ar[d]_-{|g1|}
+&
+    |Tri + ((Int x Int) x Int)|
+           \ar[d]^{|id + ((g1 x g1) x g1)|}
+           \ar[l]_-{|inLTree3|}
+\\
+     |Tri*|
+&
+     |Tri + ((Tri* x Tri*), Tri*)|
+           \ar[l]^-{|g1|}
+}
+\end{eqnarray*}
+
 
 \subsection*{Problema 4}
 
