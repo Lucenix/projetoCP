@@ -46,7 +46,7 @@ geraSierp = anaLTree3 g2
 folhasSierp :: LTree3 Tri -> [Tri]
 folhasSierp = cataLTree3 g1
     where
-        g1 = either nil (uncurry (++) . ((uncurry (++) >< id)))
+        g1 = either singl (uncurry (++) . ((uncurry (++) >< id)))
 
 sierpinski :: (Tri,Int) -> [Tri]
 sierpinski = folhasSierp . geraSierp
