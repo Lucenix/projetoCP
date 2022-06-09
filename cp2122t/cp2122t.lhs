@@ -925,7 +925,14 @@ anaLTree3 f = inLTree3 . (recLTree3 (anaLTree3 f) ) . f
 hyloLTree3 f g = cataLTree3 f . anaLTree3 g
 
 \end{code}
+
 Genes do hilomorfismo |sierpinski|:
+O g1 é o gene do catamorfismo e o g2 é o gene do anamorfismo.
+Resolução do g1:
+A partir de um Tri ou ((Tri*, Tri*), Tri*), queremos obter uma lista de Tri (Tri*).
+Se for um tri, queremos colocar em uma lista singular, senão temos fazer a concatenação das três listas de Tri.
+Optamos por escreve a função em haskell pointwise e passar para pointfree.
+
 \begin{code}
 g1 = either singl (uncurry (++) . ((uncurry (++) >< id)))
 
