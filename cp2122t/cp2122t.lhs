@@ -968,7 +968,7 @@ de tal forma que se possa utilizar a regra |Fokkinga|.
 %
 \just\equiv{(22)}
 %
-     |a.in = (either id (uncurry max).(p2 >< p2)).(id -|- ((split a b) >< (split a b)))|
+     |a.in = (either id (uncurry max).(p2 >< p2)).(id + ((split a b) >< (split a b)))|
 %
 \just\equiv{(def F(split a b))}
 %
@@ -994,7 +994,7 @@ Ficamos então com:
 %
      |split a b = cataLTree (split (either id (uncurry max.(p2 >< p2))) (either id (uncurry min.(p1 >< p1))))|
 \qed
-\ennd{eqnarray*}
+\end{eqnarray*}
 
 
 \begin{code}

@@ -1217,22 +1217,79 @@ de tal forma que se possa utilizar a regra \ensuremath{\Conid{Fokkinga}}.
 
 \subsection*{Problema 2}
 
+\begin{eqnarray*}
+\start
+     \ensuremath{\begin{lcbr}\Varid{a}\comp \Varid{leaf}\;\Varid{x}\mathrel{=}\Varid{id}\;\Varid{x}\\\Varid{a}\comp \Conid{Fork}\;(\Varid{t1},\Varid{t2})\mathrel{=}\uncurry{\Varid{max}}\;(\Varid{b}\times\Varid{b})\;(\Varid{t1},\Varid{t2})\end{lcbr}}
+%
+\just\equiv{(71)}
+%
+     \ensuremath{\begin{lcbr}\Varid{a}\comp \Varid{leaf}\mathrel{=}\Varid{id}\\\Varid{a}\comp \Conid{Fork}\mathrel{=}\uncurry{\Varid{max}}\;(\Varid{b}\times\Varid{b})\end{lcbr}}
+%
+\just\equiv{(27)}
+%
+     \ensuremath{\alt{\Varid{a}}{\cdot }\comp \Conid{Leaf}\;\Varid{a}\comp \Conid{Fork}\mathrel{=}\alt{\Varid{id}}{\uncurry{\Varid{max}}}\comp (\Varid{b}\times\Varid{b})}
+%
+\just\equiv{(20)}
+%
+     \ensuremath{\Varid{a}\comp \alt{\Conid{Leaf}}{\Conid{Fork}}\mathrel{=}\alt{\Varid{id}}{\uncurry{\Varid{max}}}\comp (\Varid{b}\times\Varid{b})}
+%
+\just\equiv{(def in)}
+%
+     \ensuremath{\Varid{a}\comp \mathbf{in}\mathrel{=}\alt{\Varid{id}}{\uncurry{\Varid{max}}}\comp (\Varid{b}\times\Varid{b})}
+%
+\just\equiv{(1),(7)}
+%
+     \ensuremath{\Varid{a}\comp \mathbf{in}\mathrel{=}\alt{\Varid{id}}{\cdot }\comp \Varid{id}\;\uncurry{\Varid{max}}\comp (\p2\comp \conj{\Varid{a}}{\Varid{b}}\times\p2\comp \conj{\Varid{a}}{\Varid{b}})}
+%
+\just\equiv{(14)}
+%
+     \ensuremath{\Varid{a}\comp \mathbf{in}\mathrel{=}\alt{\Varid{id}}{\cdot }\comp \Varid{id}\;\uncurry{\Varid{max}}\comp (\p2\times\p2)\comp (\conj{\Varid{a}}{\Varid{b}}\times\conj{\Varid{a}}{\Varid{b}})}
+%
+\just\equiv{(22)}
+%
+     \ensuremath{\Varid{a}\comp \mathbf{in}\mathrel{=}(\alt{\Varid{id}}{\uncurry{\Varid{max}}}\comp (\p2\times\p2))\comp (\Varid{id}\mathbin{+}(\conj{\Varid{a}}{\Varid{b}}\times\conj{\Varid{a}}{\Varid{b}}))}
+%
+\just\equiv{(def F(split a b))}
+%
+     \ensuremath{\Varid{a}\comp \mathbf{in}\mathrel{=}\alt{\Varid{id}}{\uncurry{\Varid{max}}\;(\p2\times\p2)}\comp \Conid{F}\;\conj{\Varid{a}}{\Varid{b}}}
+\qed
+\end{eqnarray*}
+
+O calculo para b é feito de modo inteiramente análogo.
+Ficamos então com:
+\begin{eqnarray*}
+\start
+     \ensuremath{\begin{lcbr}\Varid{a}\comp \mathbf{in}\mathrel{=}\alt{\Varid{id}}{\uncurry{\Varid{max}}\;(\p2\times\p2)}\comp \Conid{F}\;\conj{\Varid{a}}{\Varid{b}}\\\Varid{b}\comp \mathbf{in}\mathrel{=}\alt{\Varid{id}}{\uncurry{\Varid{min}}\;(\p1\times\p1)}\comp \Conid{F}\;\conj{\Varid{a}}{\Varid{b}}\end{lcbr}}
+%
+\just\equiv{(52)}
+%
+     \ensuremath{\conj{\Varid{a}}{\Varid{b}}\mathrel{=}\llparenthesis\, \conj{\alt{\Varid{id}}{\uncurry{\Varid{max}}\comp (\p2\times\p2)}}{\alt{\Varid{id}}{\uncurry{\Varid{min}}\comp (\p1\times\p1)}}\,\rrparenthesis}
+%
+\just\equiv{both = split a b}
+%
+     \ensuremath{\conj{\Varid{a}}{\Varid{b}}\mathrel{=}\llparenthesis\, \conj{\alt{\Varid{id}}{\uncurry{\Varid{max}}\comp (\p2\times\p2)}}{\alt{\Varid{id}}{\uncurry{\Varid{min}}\comp (\p1\times\p1)}}\,\rrparenthesis}
+\qed
+\end{eqnarray*}
+
+
 \begin{hscode}\SaveRestoreHook
 \column{B}{@{}>{\hspre}l<{\hspost}@{}}%
-\column{7}{@{}>{\hspre}l<{\hspost}@{}}%
 \column{E}{@{}>{\hspre}l<{\hspost}@{}}%
 \>[B]{}\Varid{alice}\mathbin{::}\Conid{Ord}\;\Varid{c}\Rightarrow {\LTree}\;\Varid{c}\to \Varid{c}{}\<[E]%
 \\
-\>[B]{}\Varid{alice}\mathrel{=}\bot {}\<[E]%
+\>[B]{}\Varid{alice}\comp \Conid{Leaf}\mathrel{=}\Varid{id}{}\<[E]%
+\\
+\>[B]{}\Varid{alice}\comp \Conid{Fork}\mathrel{=}\uncurry{\Varid{max}}\comp (\Varid{bob}\times\Varid{bob}){}\<[E]%
 \\[\blanklineskip]%
 \>[B]{}\Varid{bob}\mathbin{::}\Conid{Ord}\;\Varid{c}\Rightarrow {\LTree}\;\Varid{c}\to \Varid{c}{}\<[E]%
 \\
-\>[B]{}\Varid{bob}{}\<[7]%
-\>[7]{}\mathrel{=}\bot {}\<[E]%
+\>[B]{}\Varid{bob}\comp \Conid{Leaf}\mathrel{=}\Varid{id}{}\<[E]%
+\\
+\>[B]{}\Varid{bob}\comp \Conid{Fork}\mathrel{=}\uncurry{\Varid{min}}\comp (\Varid{alice}\times\Varid{alice}){}\<[E]%
 \\[\blanklineskip]%
 \>[B]{}\Varid{both}\mathbin{::}\Conid{Ord}\;\Varid{d}\Rightarrow {\LTree}\;\Varid{d}\to (\Varid{d},\Varid{d}){}\<[E]%
 \\
-\>[B]{}\Varid{both}\mathrel{=}\bot {}\<[E]%
+\>[B]{}\Varid{both}\mathrel{=}\llparenthesis\, \conj{\alt{\Varid{id}}{\uncurry{\Varid{max}}\comp (\p2\times\p2)}}{\alt{\Varid{id}}{\uncurry{\Varid{min}}\comp (\p1\times\p1)}}\,\rrparenthesis{}\<[E]%
 \ColumnHook
 \end{hscode}\resethooks
 
@@ -1266,7 +1323,14 @@ Biblioteca \ensuremath{\mathsf{LTree3}}:
 \>[B]{}\Varid{hyloLTree3}\;\Varid{f}\;\Varid{g}\mathrel{=}\Varid{cataLTree3}\;\Varid{f}\comp \Varid{anaLTree3}\;\Varid{g}{}\<[E]%
 \ColumnHook
 \end{hscode}\resethooks
+
 Genes do hilomorfismo \ensuremath{\Varid{sierpinski}}:
+O g1 é o gene do catamorfismo e o g2 é o gene do anamorfismo.
+Resolução do g1:
+A partir de um Tri ou ((Tri*, Tri*), Tri*), queremos obter uma lista de Tri (Tri*).
+Se for um tri, queremos colocar em uma lista singular, senão temos fazer a concatenação das três listas de Tri.
+Optamos por escreve a função em haskell pointwise e passar para pointfree.
+
 \begin{hscode}\SaveRestoreHook
 \column{B}{@{}>{\hspre}l<{\hspost}@{}}%
 \column{5}{@{}>{\hspre}l<{\hspost}@{}}%
