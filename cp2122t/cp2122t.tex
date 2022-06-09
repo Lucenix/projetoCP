@@ -1264,8 +1264,8 @@ monádica aplicada a uma lista, ao invés de uma lista de estruturas do mesmo ti
 Então, para se definir a função \ensuremath{\Varid{propagate}} é necessário definir o seu comportamento, depois de receber a função \ensuremath{\Varid{f}}.
 Renomeie-se os tipos das funções tais que \ensuremath{\Varid{t}\equiv \Conid{A}} e \ensuremath{\Varid{a}\equiv \mathit B}.
 Assim, para definir corretamente a função \ensuremath{\Varid{propagate}\;\Varid{f}} é necessário conhecer qual o gene do seu catamorfismo, 
-uma função que obtenha \ensuremath{\Conid{M}\;\mathit B\mathbin{\uparrow}\{\mskip1.5mu \mathbin{*}\mskip1.5mu\}} a partir de \ensuremath{\mathrm{1}\mathbin{+}\Conid{A}\lambda \Varid{times}\;\Conid{M}\;\mathit B\mathbin{\uparrow}\{\mskip1.5mu \mathbin{*}\mskip1.5mu\}}. 
-Por um lado, a função \ensuremath{\Varid{f}} obtém \ensuremath{\Conid{M}\;\mathit B} a partir do elemento da cabeça da lista \ensuremath{\Conid{A}}, chegando então a \ensuremath{\mathrm{1}\mathbin{+}\Conid{M}\;\mathit B\lambda \Varid{times}\;\Conid{M}\;\mathit B\mathbin{\uparrow}\{\mskip1.5mu \mathbin{*}\mskip1.5mu\}}.
+uma função que obtenha \ensuremath{\Conid{M}\;\mathit B\mathbin{\uparrow}\{\mskip1.5mu \mathbin{*}\mskip1.5mu\}} a partir de \ensuremath{\mathrm{1}\mathbin{+}\Conid{A}\times\Conid{M}\;\mathit B\mathbin{\uparrow}\{\mskip1.5mu \mathbin{*}\mskip1.5mu\}}. 
+Por um lado, a função \ensuremath{\Varid{f}} obtém \ensuremath{\Conid{M}\;\mathit B} a partir do elemento da cabeça da lista \ensuremath{\Conid{A}}, chegando então a \ensuremath{\mathrm{1}\mathbin{+}\Conid{M}\;\mathit B\times\Conid{M}\;\mathit B\mathbin{\uparrow}\{\mskip1.5mu \mathbin{*}\mskip1.5mu\}}.
 Por outro lado, pretendemos concatenar o resultado \ensuremath{\mathit B}, retirando-lhe o mónade momentaneamente, 
 ao resultado de aplicar a chamada recursiva à cauda, nomeadamente a função \ensuremath{\Varid{monad\char95 cons}} que retira do mónade os elementos do par
 e devolve a concatenação no mónade, utilizando \ensuremath{\Varid{return}}.
@@ -1283,17 +1283,17 @@ Ambas estes passos podem ser compostos na função \ensuremath{g_2 }, definida n
 
 \begin{eqnarray*}
 \start
-     \ensuremath{g_2 \mathrel{=}\alt{\Varid{return}\comp \Varid{nil}}{g_1 }\comp (\Varid{id}\mathbin{+}\Varid{f}\lambda \Varid{times}\;\Varid{id})}
+     \ensuremath{g_2 \mathrel{=}\alt{\Varid{return}\comp \Varid{nil}}{g_1 }\comp (\Varid{id}\mathbin{+}\Varid{f}\times\Varid{id})}
 %
 \just\equiv{(22); (1)}
 %
-     \ensuremath{g_2 \mathrel{=}\alt{\Varid{return}\comp \Varid{nil}}{g_1 \comp (\Varid{f}\lambda \Varid{times}\;\Varid{id})}}
+     \ensuremath{g_2 \mathrel{=}\alt{\Varid{return}\comp \Varid{nil}}{g_1 \comp (\Varid{f}\times\Varid{id})}}
 \qed
 \end{eqnarray*}
 
 \begin{eqnarray*}
 \start
-     \ensuremath{(g_1 \comp (\Varid{f}\lambda \Varid{times}\;\Varid{id}))\;(\Varid{a},\Varid{b})}
+     \ensuremath{(g_1 \comp (\Varid{f}\times\Varid{id}))\;(\Varid{a},\Varid{b})}
 %
 \just ={(72); (77); (1)}
 %
@@ -1306,21 +1306,21 @@ isto é, aplicar \ensuremath{\Varid{return}} após \ensuremath{\Varid{nil}} ao e
 
 \begin{eqnarray*}
 \xymatrix@C=2cm{
-    A^{*}
-          \ar[d]_-{\ensuremath{(\Varid{propagate}\;\Varid{f})}}
+    \ensuremath{[\mskip1.5mu \Conid{A}\mskip1.5mu]}
+          \ar[d]_-{\ensuremath{\Varid{propagate}\;\Varid{f}}}
 &
-    1 + A \times A^{*}
-          \ar[d]^{\ensuremath{\Varid{id}\mathbin{+}\Varid{id}\lambda \Varid{times}\;(\Varid{propagate}\;\Varid{f})}}
+    \ensuremath{\mathrm{1}\mathbin{+}\Conid{A}\times[\mskip1.5mu \Conid{A}\mskip1.5mu]}
+          \ar[d]^{\ensuremath{\Varid{id}\mathbin{+}\Varid{id}\times(\Varid{propagate}\;\Varid{f})}}
           \ar[l]_-{\ensuremath{\Varid{inList}}}
 \\
-     M B^{*}
+    \ensuremath{\Conid{M}\;[\mskip1.5mu \mathit B\mskip1.5mu]}
 &
-     1 + A \times M B^{*}
+     \ensuremath{\mathrm{1}\mathbin{+}\Conid{A}\times\Conid{M}\;[\mskip1.5mu \mathit B\mskip1.5mu]}
           \ar[l]^{\ensuremath{\alt{\Varid{return}\comp \Varid{nil}}{g_2 \;\Varid{f}}}}
-          \ar[d]^{id + f \times id}
+          \ar[d]^{\ensuremath{\Varid{id}\mathbin{+}\Varid{f}\times\Varid{id}}}
 \\
 &
-    1 + M B \times M B^{*}
+    \ensuremath{\mathrm{1}\mathbin{+}\Conid{M}\;\mathit B\times\Conid{M}\;[\mskip1.5mu \mathit B\mskip1.5mu]}
           \ar[ul]^{\ensuremath{\alt{\Varid{return}\comp \Varid{nil}}{g_1 }}}
 }
 \end{eqnarray*}
@@ -1360,29 +1360,29 @@ Tal com anteriormente, todos estes passos podem ser compostos numa só função 
 
 \begin{eqnarray*}
 \xymatrix@C=2cm{
-    \ensuremath{\Conid{Bit}\mathbin{\uparrow}\{\mskip1.5mu \mathbin{*}\mskip1.5mu\}}
-           \ar[d]_-{\ensuremath{\cataNat{\Varid{propagate3}\;\Varid{f}}}}
+    \ensuremath{[\mskip1.5mu \Conid{Bit}\mskip1.5mu]}
+           \ar[d]_-{\ensuremath{\Varid{propagate3}\;\Varid{f}}}
 &
-    \ensuremath{\mathrm{1}\mathbin{+}\Conid{Bit}\lambda \Varid{times}\;\Conid{Bit}\mathbin{\uparrow}\{\mskip1.5mu \mathbin{*}\mskip1.5mu\}}
-           \ar[d]^{\ensuremath{\Varid{id}\mathbin{+}\Varid{id}\lambda \Varid{times}\;\cataNat{\cdot }\;(\Varid{propagate3}\;\Varid{f})}}
+    \ensuremath{\mathrm{1}\mathbin{+}\Conid{Bit}\times\Conid{M}\;[\mskip1.5mu \Conid{Bit}\mskip1.5mu]}
+           \ar[d]^{\ensuremath{\Varid{id}\mathbin{+}\Varid{id}\times(\Varid{propagate3}\;\Varid{f})}}
            \ar[l]_-{\ensuremath{\Varid{inList}}}
 \\
-     \ensuremath{\Conid{M}\;\Conid{Bit}\mathbin{\uparrow}\{\mskip1.5mu \mathbin{*}\mskip1.5mu\}}
+     \ensuremath{\Conid{M}\;[\mskip1.5mu \Conid{Bit}\mskip1.5mu]}
 &
-     \ensuremath{\mathrm{1}\mathbin{+}\Conid{Bit}\lambda \Varid{times}\;\Conid{M}\;\Conid{Bit}\mathbin{\uparrow}\{\mskip1.5mu \mathbin{*}\mskip1.5mu\}}
+     \ensuremath{\mathrm{1}\mathbin{+}\Conid{Bit}\times\Conid{M}\;[\mskip1.5mu \Conid{Bit}\mskip1.5mu]}
             \ar[l]^{\ensuremath{\alt{\Varid{return}\comp \Varid{nil}}{g_2 \;\Varid{f}}}}
-           \ar[d]^{id + (a,a,a) \times id}
+           \ar[d]^{\ensuremath{\Varid{id}\mathbin{+}(\Varid{a},\Varid{a},\Varid{a})\times\Varid{id}}}
 \\
 &
-    \ensuremath{\mathrm{1}\mathbin{+}\Conid{Bit3}\lambda \Varid{times}\;\Conid{M}\;\Conid{Bit}\mathbin{\uparrow}\{\mskip1.5mu \mathbin{*}\mskip1.5mu\}}
-        \ar[d]^{id + bitflip3 \times id}
+    \ensuremath{\mathrm{1}\mathbin{+}\Conid{Bit3}\times\Conid{M}\;[\mskip1.5mu \Conid{Bit}\mskip1.5mu]}
+        \ar[d]^{\ensuremath{\Varid{id}\mathbin{+}\Varid{bitflip3}\times\Varid{id}}}
 \\
 &
-    \ensuremath{\mathrm{1}\mathbin{+}\Conid{M}\;\Conid{Bit3}\lambda \Varid{times}\;\Conid{M}\;\Conid{Bit}\mathbin{\uparrow}\{\mskip1.5mu \mathbin{*}\mskip1.5mu\}}
-        \ar[d]^{id + (fmap v3) \times id}
+    \ensuremath{\mathrm{1}\mathbin{+}\Conid{M}\;\Conid{Bit3}\times\Conid{M}\;[\mskip1.5mu \Conid{Bit}\mskip1.5mu]}
+        \ar[d]^{\ensuremath{\Varid{id}\mathbin{+}(\mathsf{fmap}\;(v_3 ))\times\Varid{id}}}
 \\
 &
-    \ensuremath{\mathrm{1}\mathbin{+}\Conid{M}\;\Conid{Bit}\lambda \Varid{times}\;\Conid{M}\;\Conid{Bit}\mathbin{\uparrow}\{\mskip1.5mu \mathbin{*}\mskip1.5mu\}}
+    \ensuremath{\mathrm{1}\mathbin{+}\Conid{M}\;\Conid{Bit}\times\Conid{M}\;[\mskip1.5mu \Conid{Bit}\mskip1.5mu]}
             \ar[uuul]^{\ensuremath{\alt{\Varid{return}\comp \Varid{nil}}{g_1 }}}
 }
 \end{eqnarray*}

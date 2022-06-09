@@ -943,8 +943,8 @@ monádica aplicada a uma lista, ao invés de uma lista de estruturas do mesmo ti
 Então, para se definir a função |propagate| é necessário definir o seu comportamento, depois de receber a função |f|.
 Renomeie-se os tipos das funções tais que |t == A| e |a == B|.
 Assim, para definir corretamente a função |propagate f| é necessário conhecer qual o gene do seu catamorfismo, 
-uma função que obtenha |M B^{*}| a partir de |1 + A \times M B^{*}|. 
-Por um lado, a função |f| obtém |M B| a partir do elemento da cabeça da lista |A|, chegando então a |1 + M B \times M B^{*}|.
+uma função que obtenha |M B^{*}| a partir de |1 + A >< M B^{*}|. 
+Por um lado, a função |f| obtém |M B| a partir do elemento da cabeça da lista |A|, chegando então a |1 + M B >< M B^{*}|.
 Por outro lado, pretendemos concatenar o resultado |B|, retirando-lhe o mónade momentaneamente, 
 ao resultado de aplicar a chamada recursiva à cauda, nomeadamente a função |monad_cons| que retira do mónade os elementos do par
 e devolve a concatenação no mónade, utilizando |return|.
@@ -958,17 +958,17 @@ Ambas estes passos podem ser compostos na função |g2|, definida na solução, 
 
 \begin{eqnarray*}
 \start
-     |g2 = (either (return . nil) (g1)) . (id + f \times id)|
+     |g2 = (either (return . nil) (g1)) . (id + f >< id)|
 %
 \just\equiv{(22); (1)}
 %
-     |g2 = either (return . nil) (g1 . (f \times id))|
+     |g2 = either (return . nil) (g1 . (f >< id))|
 \qed
 \end{eqnarray*}
 
 \begin{eqnarray*}
 \start
-     |(g1 . (f \times id)) (a,b)|
+     |(g1 . (f >< id)) (a,b)|
 %
 \just ={(72); (77); (1)}
 %
@@ -981,21 +981,21 @@ isto é, aplicar |return| após |nil| ao elemento |()|.
 
 \begin{eqnarray*}
 \xymatrix@@C=2cm{
-    A^{*}
-          \ar[d]_-{|(propagate f)|}
+    |[A]|
+          \ar[d]_-{|propagate f|}
 &
-    1 + A \times A^{*}
-          \ar[d]^{|id + id \times (propagate f)|}
+    |1 + A >< [A]|
+          \ar[d]^{|id + id >< (propagate f)|}
           \ar[l]_-{|inList|}
 \\
-     M B^{*}
+    |M [B]|
 &
-     1 + A \times M B^{*}
+     |1 + A >< M [B]|
           \ar[l]^{|either (return . nil) (g2 f)|}
-          \ar[d]^{id + f \times id}
+          \ar[d]^{|id + f >< id|}
 \\
 &
-    1 + M B \times M B^{*}
+    |1 + M B >< M [B]|
           \ar[ul]^{|either (return . nil) (g1)|}
 }
 \end{eqnarray*}
@@ -1009,46 +1009,46 @@ propagate f = cataList (g f) where
    g2 f (a,b) = do {x <- (f a); y <- b; return (x:y)}
 \end{code}
 
-Para se definir |propagate3|, é necessário explicitar os tipos de |f :: (Monad m) => (Bit3 -> m Bit3)|, 
-já que se pretende que |propagate3| triplique cada |Bit| da lista de entrada para uma estrutura do tipo |Bit3|.
+Ao contrário de da função |propagate|, para se definir |propagate3|, é necessário explicitar os tipos de |f :: (Monad m) => (Bit3 -> m Bit3)|, 
+já que se pretende que |propagate3| triplique, especificamente, cada |Bit| da lista de entrada para uma estrutura do tipo |Bit3|, durante a sua execução.
 A sequência de aplicações do gene, que manipulam a cabeça da lista, é a seguinte:
 
 \begin{enumerate}
 \item Construir o triplo |Bit3| a partir de |Bit|, replicando-o três vezes.
-\item Aplicar |f| (especificamente |bflip3|) a |Bit3|, produzindo |m Bit3|.
+\item Aplicar |f| (por exemplo, |bflip3|) a |Bit3|, produzindo |m Bit3|.
 \item Reduzir |m Bit3| a |m Bit|, utilizando a função |v3 :: Bit3 -> Bit| estendida para se 
 aplicar a |m Bit3| com o |functor| desse mónade, através de |fmap|.
 \item Reconstruir |m [Bit]| de forma análoga a |propagate|, através de
 |either (return . nil) (g1 f)|.
 \end{enumerate}
 
-Tal com anteriormente, todos estes passos podem ser compostos numa só função por sucessivas aplicações da regra de |absorção-+|.
+Tal como anteriormente, todos estes passos podem ser compostos com |g1| numa só função por sucessivas aplicações da regra de |absorção-+|.
 
 \begin{eqnarray*}
 \xymatrix@@C=2cm{
-    |Bit^{*}|
-           \ar[d]_-{|cataNat (propagate3 f)|}
+    |[Bit]|
+           \ar[d]_-{|propagate3 f|}
 &
-    |1 + Bit \times Bit^{*}|
-           \ar[d]^{|id + id \times cataNat (propagate3 f)|}
+    |1 + Bit >< M [Bit]|
+           \ar[d]^{|id + id >< (propagate3 f)|}
            \ar[l]_-{|inList|}
 \\
-     |M Bit^{*}|
+     |M [Bit]|
 &
-     |1 + Bit \times M Bit^{*}|
+     |1 + Bit >< M [Bit]|
             \ar[l]^{|either (return . nil) (g2 f)|}
-           \ar[d]^{id + (a,a,a) \times id}
+           \ar[d]^{|id + (a,a,a) >< id|}
 \\
 &
-    |1 + Bit3 \times M Bit^{*}|
-        \ar[d]^{id + bitflip3 \times id}
+    |1 + Bit3 >< M [Bit]|
+        \ar[d]^{|id + bitflip3 >< id|}
 \\
 &
-    |1 + M Bit3 \times M Bit^{*}|
-        \ar[d]^{id + (fmap v3) \times id}
+    |1 + M Bit3 >< M [Bit]|
+        \ar[d]^{|id + (fmap (v3)) >< id|}
 \\
 &
-    |1 + M Bit \times M Bit^{*}|
+    |1 + M Bit >< M [Bit]|
             \ar[uuul]^{|either (return . nil) (g1)|}
 }
 \end{eqnarray*}
