@@ -891,15 +891,80 @@ Apresentar cálculos aqui, se desejável acompanhados de diagramas, etc.
 
 \subsection*{Problema 2}
 
+\begin{eqnarray*}
+\start
+     |lcbr(a.leaf x = id x)
+          (a.Fork (t1,t2) = (uncurry max) (b >< b) (t1,t2))
+     |
+%
+\just\equiv{(71)}
+%
+     |lcbr(a.leaf = id)
+          (a.Fork = (uncurry max) (b >< b))
+     |
+%
+\just\equiv{(27)}
+%
+     |either a.Leaf a.Fork = either id (uncurry max).(b >< b)|
+%
+\just\equiv{(20)}
+%
+     |a.(either Leaf Fork) = either id (uncurry max).(b >< b)|
+%
+\just\equiv{(def in)}
+%
+     |a.in = either id (uncurry max).(b >< b)|
+%
+\just\equiv{(1),(7)}
+%
+     |a.in = either id.id (uncurry max).(p2.(split a b) >< p2.(split a b))|
+%
+\just\equiv{(14)}
+%
+     |a.in = either id.id (uncurry max).(p2 >< p2).((split a b) >< (split a b))|
+%
+\just\equiv{(22)}
+%
+     |a.in = (either id (uncurry max).(p2 >< p2)).(id -|- ((split a b) >< (split a b)))|
+%
+\just\equiv{(def F(split a b))}
+%
+     |a.in = (either id (uncurry max (p2 >< p2))).F(split a b)|
+\qed
+\end{eqnarray*}
+
+O calculo para b é feito de modo inteiramente análogo.
+Ficamos então com:
+\begin{eqnarray*}
+\start
+     |lcbr(
+          a.in = (either id (uncurry max (p2 >< p2))).F(split a b) 
+     )(
+          b.in = (either id (uncurry min (p1 >< p1))).F(split a b)
+     )|
+%
+\just\equiv{(52)}
+%
+     |split a b = cataLTree (split (either id (uncurry max.(p2 >< p2))) (either id (uncurry min.(p1 >< p1))))|
+%
+\just\equiv{both = split a b}
+%
+     |split a b = cataLTree (split (either id (uncurry max.(p2 >< p2))) (either id (uncurry min.(p1 >< p1))))|
+\qed
+\ennd{eqnarray*}
+
+
 \begin{code}
 alice :: Ord c => LTree c -> c
-alice = undefined
+alice.Leaf = id
+alice.Fork = (uncurry max).(bob >< bob) 
 
 bob :: Ord c => LTree c -> c
-bob   = undefined    
+bob.Leaf = id
+bob.Fork = (uncurry min).(alice >< alice)    
 
 both :: Ord d => LTree d -> (d, d)
-both = undefined
+both = cataLTree (split (either id (uncurry max.(p2 >< p2))) (either id (uncurry min.(p1 >< p1))))
 \end{code}
 
 \subsection*{Problema 3}
