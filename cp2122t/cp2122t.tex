@@ -1206,6 +1206,7 @@ Apresentar cálculos aqui, se desejável acompanhados de diagramas, etc.
 \end{hscode}\resethooks
 
 \subsection*{Problema 3}
+
 Biblioteca \ensuremath{\mathsf{LTree3}}:
 
 \begin{hscode}\SaveRestoreHook
@@ -1237,24 +1238,41 @@ Biblioteca \ensuremath{\mathsf{LTree3}}:
 Genes do hilomorfismo \ensuremath{\Varid{sierpinski}}:
 \begin{hscode}\SaveRestoreHook
 \column{B}{@{}>{\hspre}l<{\hspost}@{}}%
-\column{6}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{5}{@{}>{\hspre}l<{\hspost}@{}}%
 \column{E}{@{}>{\hspre}l<{\hspost}@{}}%
-\>[B]{}g_1 \mathrel{=}\alt{\Varid{nil}}{\uncurry{(\mathbin{+\!\!\!+})}\comp ((\uncurry{(\mathbin{+\!\!\!+})}\times\Varid{id}))}{}\<[E]%
+\>[B]{}g_1 \mathrel{=}\alt{\Varid{singl}}{\uncurry{(\mathbin{+\!\!\!+})}\comp ((\uncurry{(\mathbin{+\!\!\!+})}\times\Varid{id}))}{}\<[E]%
 \\[\blanklineskip]%
 \>[B]{}g_2 \;(\Varid{t},\mathrm{0})\mathrel{=}i_1\;\Varid{t}{}\<[E]%
 \\
-\>[B]{}g_2 \;(((\Varid{x},\Varid{y}),\Varid{s}),\Varid{n}\mathbin{+}\mathrm{1})\mathrel{=}i_2\;((\Varid{t1},\Varid{t2}),\Varid{t3})\;\mathbf{where}{}\<[E]%
+\>[B]{}g_2 \;(((\Varid{x},\Varid{y}),\Varid{s}),\Varid{n})\mathrel{=}i_2\;((\Varid{t1},\Varid{t2}),\Varid{t3})\;\mathbf{where}{}\<[E]%
 \\
-\>[B]{}\hsindent{6}{}\<[6]%
-\>[6]{}\Varid{t1}\mathrel{=}(((\Varid{x},\Varid{y}),\Varid{s}\mathbin{\Varid{`div`}}\mathrm{2}),\Varid{n}\mathbin{-}\mathrm{1}){}\<[E]%
+\>[B]{}\hsindent{5}{}\<[5]%
+\>[5]{}\Varid{t1}\mathrel{=}(((\Varid{x},\Varid{y}),\Varid{s}\mathbin{\Varid{`div`}}\mathrm{2}),\Varid{n}\mathbin{-}\mathrm{1}){}\<[E]%
 \\
-\>[B]{}\hsindent{6}{}\<[6]%
-\>[6]{}\Varid{t2}\mathrel{=}(((\Varid{x}\mathbin{+}\Varid{s}\mathbin{\Varid{`div`}}\mathrm{2},\Varid{y}),\Varid{s}\mathbin{\Varid{`div`}}\mathrm{2}),\Varid{n}\mathbin{-}\mathrm{1}){}\<[E]%
+\>[B]{}\hsindent{5}{}\<[5]%
+\>[5]{}\Varid{t2}\mathrel{=}(((\Varid{x}\mathbin{+}\Varid{s}\mathbin{\Varid{`div`}}\mathrm{2},\Varid{y}),\Varid{s}\mathbin{\Varid{`div`}}\mathrm{2}),\Varid{n}\mathbin{-}\mathrm{1}){}\<[E]%
 \\
-\>[B]{}\hsindent{6}{}\<[6]%
-\>[6]{}\Varid{t3}\mathrel{=}(((\Varid{x},\Varid{y}\mathbin{+}\Varid{s}\mathbin{\Varid{`div`}}\mathrm{2}),\Varid{s}\mathbin{\Varid{`div`}}\mathrm{2}),\Varid{n}\mathbin{-}\mathrm{1}){}\<[E]%
+\>[B]{}\hsindent{5}{}\<[5]%
+\>[5]{}\Varid{t3}\mathrel{=}(((\Varid{x},\Varid{y}\mathbin{+}\Varid{s}\mathbin{\Varid{`div`}}\mathrm{2}),\Varid{s}\mathbin{\Varid{`div`}}\mathrm{2}),\Varid{n}\mathbin{-}\mathrm{1}){}\<[E]%
 \ColumnHook
 \end{hscode}\resethooks
+
+\begin{eqnarray*}
+\xymatrix@C=2cm{
+    \ensuremath{\mathsf{LTree3}\;\Conid{Tri}}
+           \ar[d]_-{\ensuremath{g_1 }}
+&
+    \ensuremath{\Conid{Tri}\mathbin{+}((\Conid{Int}\;\Varid{x}\;\Conid{Int})\;\Varid{x}\;\Conid{Int})}
+           \ar[d]^{\ensuremath{\Varid{id}\mathbin{+}((g_1 \;\Varid{x}\;g_1 )\;\Varid{x}\;g_1 )}}
+           \ar[l]_-{\ensuremath{\Varid{inLTree3}}}
+\\
+     \ensuremath{\Conid{Tri}\mathbin{*}}
+&
+     \ensuremath{\Conid{Tri}\mathbin{+}((\Conid{Tri}\mathbin{*}\Varid{x}\;\Conid{Tri}\mathbin{*}),\Conid{Tri}\mathbin{*})}
+           \ar[l]^-{\ensuremath{g_1 }}
+}
+\end{eqnarray*}
+
 
 \subsection*{Problema 4}
 
@@ -1343,20 +1361,20 @@ Definição de \ensuremath{\Varid{propagate}}:
 \ColumnHook
 \end{hscode}\resethooks
 
-Para se definir \ensuremath{\Varid{propagate3}}, é necessário explicitar os tipos de \ensuremath{\Varid{f}\mathbin{::}(\Conid{Monad}\;\Varid{m})\Rightarrow (\Conid{Bit3}\to \Varid{m}\;\Conid{Bit3})}, 
-já que se pretende que \ensuremath{\Varid{propagate3}} triplique cada \ensuremath{\Conid{Bit}} da lista de entrada para uma estrutura do tipo \ensuremath{\Conid{Bit3}}.
+Ao contrário de da função \ensuremath{\Varid{propagate}}, para se definir \ensuremath{\Varid{propagate3}}, é necessário explicitar os tipos de \ensuremath{\Varid{f}\mathbin{::}(\Conid{Monad}\;\Varid{m})\Rightarrow (\Conid{Bit3}\to \Varid{m}\;\Conid{Bit3})}, 
+já que se pretende que \ensuremath{\Varid{propagate3}} triplique, especificamente, cada \ensuremath{\Conid{Bit}} da lista de entrada para uma estrutura do tipo \ensuremath{\Conid{Bit3}}, durante a sua execução.
 A sequência de aplicações do gene, que manipulam a cabeça da lista, é a seguinte:
 
 \begin{enumerate}
 \item Construir o triplo \ensuremath{\Conid{Bit3}} a partir de \ensuremath{\Conid{Bit}}, replicando-o três vezes.
-\item Aplicar \ensuremath{\Varid{f}} (especificamente \ensuremath{\Varid{bflip3}}) a \ensuremath{\Conid{Bit3}}, produzindo \ensuremath{\Varid{m}\;\Conid{Bit3}}.
+\item Aplicar \ensuremath{\Varid{f}} (por exemplo, \ensuremath{\Varid{bflip3}}) a \ensuremath{\Conid{Bit3}}, produzindo \ensuremath{\Varid{m}\;\Conid{Bit3}}.
 \item Reduzir \ensuremath{\Varid{m}\;\Conid{Bit3}} a \ensuremath{\Varid{m}\;\Conid{Bit}}, utilizando a função \ensuremath{v_3 \mathbin{::}\Conid{Bit3}\to \Conid{Bit}} estendida para se 
 aplicar a \ensuremath{\Varid{m}\;\Conid{Bit3}} com o \ensuremath{\Varid{functor}} desse mónade, através de \ensuremath{\mathsf{fmap}}.
 \item Reconstruir \ensuremath{\Varid{m}\;[\mskip1.5mu \Conid{Bit}\mskip1.5mu]} de forma análoga a \ensuremath{\Varid{propagate}}, através de
 \ensuremath{\alt{\Varid{return}\comp \Varid{nil}}{g_1 \;\Varid{f}}}.
 \end{enumerate}
 
-Tal com anteriormente, todos estes passos podem ser compostos numa só função por sucessivas aplicações da regra de \ensuremath{\Varid{absorção}\mathbin{-+}}.
+Tal como anteriormente, todos estes passos podem ser compostos com \ensuremath{g_1 } numa só função por sucessivas aplicações da regra de \ensuremath{\Varid{absorção}\mathbin{-+}}.
 
 \begin{eqnarray*}
 \xymatrix@C=2cm{

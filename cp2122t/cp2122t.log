@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.3) (preloaded format=pdflatex 2022.6.8)  9 JUN 2022 14:37
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.3) (preloaded format=pdflatex 2022.6.8)  9 JUN 2022 14:50
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -741,21 +741,10 @@ File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
  [5]
 \openout5 = `cp2122t.ptb'.
 
-
-
-LaTeX Warning: Citation `Kn92' on page 6 undefined on input line 785.
-
-[6]
-
-LaTeX Warning: Citation `Ol18' on page 7 undefined on input line 852.
-
-<xymatrix 2x2 191> [7]
+ [6] <xymatrix 2x2 191> [7]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `subscript' on input line 885.
-
-
-LaTeX Warning: Citation `Ol18' on page 8 undefined on input line 889.
 
 LaTeX Font Info:    Trying to load font information for OT1+phv on input line 8
 97.
@@ -766,13 +755,10 @@ File: ot1phv.fd 2020/03/25 scalable font definitions for OT1/phv.
 
 \openout5 = `cp2122t.ptb'.
 
-
-
-LaTeX Warning: Citation `Ol18' on page 8 undefined on input line 940.
-
 \openout5 = `cp2122t.ptb'.
 
 \openout5 = `cp2122t.ptb'.
+
 
 [8]
 \openout5 = `cp2122t.ptb'.
@@ -781,17 +767,13 @@ LaTeX Warning: Citation `Ol18' on page 8 undefined on input line 940.
 
 \openout5 = `cp2122t.ptb'.
 
-
-
-LaTeX Warning: Citation `EK06' on page 9 undefined on input line 1035.
-
 \openout5 = `cp2122t.ptb'.
 
 \openout5 = `cp2122t.ptb'.
 
 \openout5 = `cp2122t.ptb'.
 
-[9]
+ [9]
 \openout5 = `cp2122t.ptb'.
 
 \openout5 = `cp2122t.ptb'.
@@ -811,26 +793,26 @@ LaTeX Warning: Citation `EK06' on page 9 undefined on input line 1035.
 
 \openout5 = `cp2122t.ptb'.
 
- [11]
+ <xymatrix 2x2 191> [11]
 \openout5 = `cp2122t.ptb'.
 
  <xymatrix 2x3 278>
 \openout5 = `cp2122t.ptb'.
 
+ [12]
+
+LaTeX Warning: Command \c invalid in math mode on input line 1377.
 
 
-LaTeX Warning: Command \c invalid in math mode on input line 1359.
-
-
-LaTeX Warning: Command \~ invalid in math mode on input line 1359.
+LaTeX Warning: Command \~ invalid in math mode on input line 1377.
 
 ! Please use \mathaccent for accents in math mode.
 \add@accent ... \let \ignorespaces \relax \accent 
                                                   #1 #2\egroup \ifmmode \els...
-l.1359 ...suremath{\Varid{absorção}\mathbin{-+}}
+l.1377 ...suremath{\Varid{absorção}\mathbin{-+}}
                                                   .
 ? 
-<xymatrix 2x5 376> [12]
+<xymatrix 2x5 376>
 \openout5 = `cp2122t.ptb'.
 
 \openout5 = `cp2122t.ptb'.
@@ -841,21 +823,15 @@ l.1359 ...suremath{\Varid{absorção}\mathbin{-+}}
 ]) (cp2122t.bbl) [15
 
 ] (cp2122t.aux)
-
-LaTeX Warning: There were undefined references.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
 Package rerunfilecheck Info: File `cp2122t.out' has not changed.
 (rerunfilecheck)             Checksum: 7ECA9E1EF440DD2F0858BE0D2D0FD343;1719.
  ) 
 Here is how much of TeX's memory you used:
- 17369 strings out of 478603
- 276243 string characters out of 2842691
- 635720 words of memory out of 3000000
- 35099 multiletter control sequences out of 15000+600000
- 511537 words of font info for 149 fonts, out of 8000000 for 9000
+ 17372 strings out of 478603
+ 276291 string characters out of 2842691
+ 633748 words of memory out of 3000000
+ 35103 multiletter control sequences out of 15000+600000
+ 510548 words of font info for 147 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  72i,18n,77p,3296b,510s stack positions out of 10000i,1000n,20000p,200000b,80000s
 
@@ -891,9 +867,9 @@ a.pfb><C:/Users/andre/AppData/Local/Programs/MiKTeX/fonts/type1/urw/palatino/up
 lri8a.pfb><C:/Users/andre/AppData/Local/Programs/MiKTeX/fonts/type1/public/xypi
 c/xyatip10.pfb><C:/Users/andre/AppData/Local/Programs/MiKTeX/fonts/type1/public
 /xypic/xybtip10.pfb>
-Output written on cp2122t.pdf (15 pages, 817576 bytes).
+Output written on cp2122t.pdf (15 pages, 819019 bytes).
 PDF statistics:
- 417 PDF objects out of 1000 (max. 8388607)
+ 422 PDF objects out of 1000 (max. 8388607)
  66 named destinations out of 1000 (max. 500000)
  80 words of extra memory for PDF output out of 10000 (max. 10000000)
 
