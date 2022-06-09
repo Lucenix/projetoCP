@@ -934,15 +934,80 @@ de tal forma que se possa utilizar a regra |Fokkinga|.
 
 \subsection*{Problema 2}
 
+\begin{eqnarray*}
+\start
+     |lcbr(a.leaf x = id x)
+          (a.Fork (t1,t2) = (uncurry max) (b >< b) (t1,t2))
+     |
+%
+\just\equiv{(71)}
+%
+     |lcbr(a.leaf = id)
+          (a.Fork = (uncurry max) (b >< b))
+     |
+%
+\just\equiv{(27)}
+%
+     |either a.Leaf a.Fork = either id (uncurry max).(b >< b)|
+%
+\just\equiv{(20)}
+%
+     |a.(either Leaf Fork) = either id (uncurry max).(b >< b)|
+%
+\just\equiv{(def in)}
+%
+     |a.in = either id (uncurry max).(b >< b)|
+%
+\just\equiv{(1),(7)}
+%
+     |a.in = either id.id (uncurry max).(p2.(split a b) >< p2.(split a b))|
+%
+\just\equiv{(14)}
+%
+     |a.in = either id.id (uncurry max).(p2 >< p2).((split a b) >< (split a b))|
+%
+\just\equiv{(22)}
+%
+     |a.in = (either id (uncurry max).(p2 >< p2)).(id -|- ((split a b) >< (split a b)))|
+%
+\just\equiv{(def F(split a b))}
+%
+     |a.in = (either id (uncurry max (p2 >< p2))).F(split a b)|
+\qed
+\end{eqnarray*}
+
+O calculo para b é feito de modo inteiramente análogo.
+Ficamos então com:
+\begin{eqnarray*}
+\start
+     |lcbr(
+          a.in = (either id (uncurry max (p2 >< p2))).F(split a b) 
+     )(
+          b.in = (either id (uncurry min (p1 >< p1))).F(split a b)
+     )|
+%
+\just\equiv{(52)}
+%
+     |split a b = cataLTree (split (either id (uncurry max.(p2 >< p2))) (either id (uncurry min.(p1 >< p1))))|
+%
+\just\equiv{both = split a b}
+%
+     |split a b = cataLTree (split (either id (uncurry max.(p2 >< p2))) (either id (uncurry min.(p1 >< p1))))|
+\qed
+\ennd{eqnarray*}
+
+
 \begin{code}
 alice :: Ord c => LTree c -> c
-alice = undefined
+alice.Leaf = id
+alice.Fork = (uncurry max).(bob >< bob) 
 
 bob :: Ord c => LTree c -> c
-bob   = undefined    
+bob.Leaf = id
+bob.Fork = (uncurry min).(alice >< alice)    
 
 both :: Ord d => LTree d -> (d, d)
-both = undefined
+both = cataLTree (split (either id (uncurry max.(p2 >< p2))) (either id (uncurry min.(p1 >< p1))))
 \end{code}
 
 \subsection*{Problema 3}
@@ -968,7 +1033,14 @@ anaLTree3 f = inLTree3 . (recLTree3 (anaLTree3 f) ) . f
 hyloLTree3 f g = cataLTree3 f . anaLTree3 g
 
 \end{code}
+
 Genes do hilomorfismo |sierpinski|:
+O g1 é o gene do catamorfismo e o g2 é o gene do anamorfismo.
+Resolução do g1:
+A partir de um Tri ou ((Tri*, Tri*), Tri*), queremos obter uma lista de Tri (Tri*).
+Se for um tri, queremos colocar em uma lista singular, senão temos fazer a concatenação das três listas de Tri.
+Optamos por escreve a função em haskell pointwise e passar para pointfree.
+
 \begin{code}
 g1 = either singl (uncurry (++) . ((uncurry (++) >< id)))
 
