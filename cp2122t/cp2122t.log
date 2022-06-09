@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.3) (preloaded format=pdflatex 2022.6.8)  9 JUN 2022 14:50
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.3) (preloaded format=pdflatex 2022.6.8)  10 JUN 2022 00:18
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -787,29 +787,42 @@ File: ot1phv.fd 2020/03/25 scalable font definitions for OT1/phv.
 \openout5 = `cp2122t.ptb'.
 
  [10]
+! Missing { inserted.
+<to be read again> 
+                   \begingroup 
+l.1201 ...m{1}},\underline{\mathrm{0}}}\end{lcbr}}
+                                                  
+? 
+! Missing } inserted.
+<inserted text> 
+                }
+l.1201 ...m{1}},\underline{\mathrm{0}}}\end{lcbr}}
+                                                  
+? 
 \openout5 = `cp2122t.ptb'.
 
 \openout5 = `cp2122t.ptb'.
 
+[11]
 \openout5 = `cp2122t.ptb'.
 
- <xymatrix 2x2 191> [11]
+ <xymatrix 2x2 191>
 \openout5 = `cp2122t.ptb'.
 
- <xymatrix 2x3 278>
+ <xymatrix 2x3 278> [12]
 \openout5 = `cp2122t.ptb'.
 
- [12]
-
-LaTeX Warning: Command \c invalid in math mode on input line 1377.
 
 
-LaTeX Warning: Command \~ invalid in math mode on input line 1377.
+LaTeX Warning: Command \c invalid in math mode on input line 1408.
+
+
+LaTeX Warning: Command \~ invalid in math mode on input line 1408.
 
 ! Please use \mathaccent for accents in math mode.
 \add@accent ... \let \ignorespaces \relax \accent 
                                                   #1 #2\egroup \ifmmode \els...
-l.1377 ...suremath{\Varid{absorção}\mathbin{-+}}
+l.1408 ...suremath{\Varid{absorção}\mathbin{-+}}
                                                   .
 ? 
 <xymatrix 2x5 376>
@@ -829,7 +842,7 @@ Package rerunfilecheck Info: File `cp2122t.out' has not changed.
 Here is how much of TeX's memory you used:
  17372 strings out of 478603
  276291 string characters out of 2842691
- 633748 words of memory out of 3000000
+ 635748 words of memory out of 3000000
  35103 multiletter control sequences out of 15000+600000
  510548 words of font info for 147 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -867,9 +880,9 @@ a.pfb><C:/Users/andre/AppData/Local/Programs/MiKTeX/fonts/type1/urw/palatino/up
 lri8a.pfb><C:/Users/andre/AppData/Local/Programs/MiKTeX/fonts/type1/public/xypi
 c/xyatip10.pfb><C:/Users/andre/AppData/Local/Programs/MiKTeX/fonts/type1/public
 /xypic/xybtip10.pfb>
-Output written on cp2122t.pdf (15 pages, 819019 bytes).
+Output written on cp2122t.pdf (15 pages, 820665 bytes).
 PDF statistics:
- 422 PDF objects out of 1000 (max. 8388607)
+ 423 PDF objects out of 1000 (max. 8388607)
  66 named destinations out of 1000 (max. 500000)
  80 words of extra memory for PDF output out of 10000 (max. 10000000)
 

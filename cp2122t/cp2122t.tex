@@ -1180,9 +1180,40 @@ simples e elegantes.
 
 \subsection*{Problema 1} \label{pg:P1}
 
-
-
 Apresentar cálculos aqui, se desejável acompanhados de diagramas, etc.
+
+Por estudo e aplicação da regra prática no anexo \ref{sec:mr}, entendemos que, 
+para chegarmos à definição apresentada, devemos ter em conta os condicionais em cada uma das funções.
+
+Para determinar \ensuremath{\Varid{aux}\;\Varid{d}\mathrel{=}\conj{\Varid{q}\;\Varid{d}}{\conj{\Varid{r}\;\Varid{d}}{\Varid{c}\;\Varid{d}}}} é necessário determinar cada uma das funções
+de tal forma que se possa utilizar a regra \ensuremath{\Conid{Fokkinga}}.
+
+\begin{eqnarray*}
+\start
+        \ensuremath{\begin{lcbr}\Varid{q}\;\Varid{d}\;\mathrm{0}\mathrel{=}\mathrm{0}\\\Varid{q}\;\Varid{d}\;(\Varid{n}\mathbin{+}\mathrm{1})\mathrel{=}\Varid{q}\;\Varid{d}\;\Varid{n}\mathbin{+}(\Varid{x}\equiv \mathrm{0})\to \mathrm{1},\mathrm{0}\;\mathbf{where}\;\Varid{x}\mathrel{=}\Varid{c}\;\Varid{d}\;\Varid{n}\end{lcbr}}
+%
+\just\equiv{ (72), (74), (71); (72), (78), substituir x, def succ }
+%
+        \ensuremath{\begin{lcbr}(\Varid{q}\;\Varid{d})\comp \underline{\mathrm{0}}\mathrel{=}\underline{\mathrm{0}}\\((\Varid{q}\;\Varid{d})\comp \succ )\;\Varid{n}\mathrel{=}(\Varid{q}\;\Varid{d})\;\Varid{n}\mathbin{+}((\equiv \mathrm{0})\;(\Varid{c}\;\Varid{d}\;\Varid{n})\to \mathrm{1},\mathrm{0})\end{lcbr}}
+%
+\just\equiv{ (84), uncurry(+) = add, (76), (72), (71) }
+%
+     \ensuremath{\begin{lcbr}(\Varid{q}\;\Varid{d})\comp \underline{\mathrm{0}}\mathrel{=}\underline{\mathrm{0}}\\(\Varid{q}\;\Varid{d})\comp \succ \mathrel{=}\Varid{add}\;\conj{\Varid{q}\;\Varid{d}}{(\equiv \mathrm{0})\comp (\Varid{cd})\to \underline{\mathrm{1}},\underline{\mathrm{0}}}\end{lcbr}}
+%
+\just\equiv{ (27), def inNat }
+%
+     \ensuremath{(\Varid{q}\;\Varid{d})\comp \mathsf{in}\mathrel{=}\alt{\underline{\mathrm{0}}}{\Varid{add}\;\conj{\Varid{q}\;\Varid{d}}{(\equiv \mathrm{0})\comp (\Varid{cd})\to \underline{\mathrm{1}},\underline{\mathrm{0}}}}}
+%
+\just\equiv{ (3), (32), (7) }
+%
+     \ensuremath{(\Varid{q}\;\Varid{d})\comp \mathsf{in}\mathrel{=}\alt{\underline{\mathrm{0}}}{\Varid{add}\;(\conj{\Varid{q}\;\Varid{d}}{(\equiv \mathrm{0})\to \underline{\mathrm{1}},\underline{\mathrm{0}}}\comp \p2\comp \conj{\Varid{r}\;\Varid{d}}{\Varid{c}\;\Varid{d}})}}
+%
+\just\equiv{ (11), (1), (22) }
+%
+     \ensuremath{(\Varid{q}\;\Varid{d})\comp \mathsf{in}\mathrel{=}\alt{\underline{\mathrm{0}}}{\Varid{add}\;(\conj{\Varid{q}\;\Varid{d}}{(\equiv \mathrm{0})\to \underline{\mathrm{1}},\underline{\mathrm{0}}}\comp \p2)}\comp (\Varid{id}\mathbin{+}\conj{\Varid{qd}}{\conj{\Varid{rd}}{\Varid{cd}}})}
+\qed
+\end{eqnarray*}
+
 
 \subsection*{Problema 2}
 

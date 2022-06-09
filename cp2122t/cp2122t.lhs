@@ -885,9 +885,52 @@ simples e elegantes.
 
 \subsection*{Problema 1} \label{pg:P1}
 
-
-
 Apresentar cálculos aqui, se desejável acompanhados de diagramas, etc.
+
+Por estudo e aplicação da regra prática no anexo \ref{sec:mr}, entendemos que, 
+para chegarmos à definição apresentada, devemos ter em conta os condicionais em cada uma das funções.
+
+Para determinar |aux d  = split (q d) (split (r d) (c d))| é necessário determinar cada uma das funções
+de tal forma que se possa utilizar a regra |Fokkinga|.
+
+\begin{eqnarray*}
+\start
+        |lcbr(
+          q d 0 = 0
+     )(
+          q d (n+1) = q d n + (x == 0) -> 1, 0 where x = c d n
+     )|
+%
+\just\equiv{ (72), (74), (71); (72), (78), substituir x, def succ }
+%
+        |lcbr(
+          (q d) . const(0) = const(0)
+     )(
+          ((q d) . succ) n = (q d) n + ((== 0) (c d n) -> 1, 0)
+     )|
+%
+\just\equiv{ (84), uncurry(+) = add, (76), (72), (71) }
+%
+     |lcbr(
+          (q d) . const(0) = const(0)
+     )(
+          (q d) . succ = add (split(q d) ((==0) . (cd) -> const(1), const(0)))
+     )|
+%
+\just\equiv{ (27), def inNat }
+%
+     | (q d) . inNat = either (const(0)) (add (split(q d) ((==0) . (cd) -> const(1), const(0))))|
+%
+\just\equiv{ (3), (32), (7) }
+%
+     | (q d) . inNat = either (const(0)) (add (split(q d) ((==0) -> const(1), const(0)) . p2 . split (r d) (c d)))|
+%
+\just\equiv{ (11), (1), (22) }
+%
+     | (q d) . inNat = (either (const(0)) (add (split(q d) ((==0) -> const(1), const(0)) . p2))) . (id + split (qd) (split (rd) (cd))) |
+\qed
+\end{eqnarray*}
+
 
 \subsection*{Problema 2}
 
