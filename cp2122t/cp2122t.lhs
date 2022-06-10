@@ -891,7 +891,8 @@ Por estudo e aplicação da regra prática no anexo \ref{sec:mr}, entendemos que
 para chegarmos à definição apresentada, devemos ter em conta os condicionais em cada uma das funções.
 
 Para determinar |aux d  = split (q d) (split (r d) (c d))| é necessário determinar cada uma das funções
-de tal forma que se possa utilizar a regra |Fokkinga|.
+de tal forma que se possa utilizar a regra de |Fokkinga|. O functor aplicável neste caso é o functor de naturais,
+isto é, |F f = id + f|. Nesse sentido, |F (split (q d) (split (r d) (c d))) = id + split (q d) (split (r d) (c d))|.
 
 \begin{eqnarray*}
 \start
@@ -914,23 +915,105 @@ de tal forma que se possa utilizar a regra |Fokkinga|.
      |lcbr(
           (q d) . const(0) = const(0)
      )(
-          (q d) . succ = add (split(q d) ((==0) . (cd) -> const(1), const(0)))
+          (q d) . succ = add . (split(q d) ((==0) . (cd) -> const(1), const(0)))
      )|
 %
 \just\equiv{ (27), def inNat }
 %
-     | (q d) . inNat = either (const(0)) (add (split(q d) ((==0) . (cd) -> const(1), const(0))))|
+     | (q d) . inNat = either (const(0)) (add . (split (q d) ((==0) . (cd) -> const(1), const(0))))|
 %
-\just\equiv{ (3), (32), (7) }
+\just\equiv{ (3), (32), (7), (1)}
 %
-     | (q d) . inNat = either (const(0)) (add (split(q d) ((==0) -> const(1), const(0)) . p2 . split (r d) (c d)))|
+     | (q d) . inNat = either (const(0)) (add . (split (id . (qd)) (((==0) -> const(1), const(0)) . p2 . split (r d) (c d))))|
 %
-\just\equiv{ (11), (1), (22) }
+\just\equiv{ (11), (22) }
 %
-     | (q d) . inNat = (either (const(0)) (add (split(q d) ((==0) -> const(1), const(0)) . p2))) . (id + split (qd) (split (rd) (cd))) |
+     | (q d) . inNat = either (const(0)) (add . (id >< (((==0) -> const(1), const(0)) . p2))) . (id + split (q d) (split (r d) (c d))) |
 \qed
 \end{eqnarray*}
 
+Analogamente, consegue-se chegar às definições de |r d| e de |c d|:
+
+\begin{eqnarray*}
+\start
+     |lcbr(
+          (r d) . inNat = either (const(0)) (((==0) . p2 -> const(0), succ . p1) . p2) . (id + split (q d) (split (r d) (c d))) 
+     )(
+          (c d) . inNat = either (const(d)) (((==0) -> const(d), (-1)) . p2 . p2) . (id + split (q d) (split (r d) (c d))) 
+     )|
+\qed
+\end{eqnarray*}
+
+Aplicando a regra de |Fokkinga|, para |aux d = split (q d) (split (r d) (c d))| e com:
+\begin{code}
+q' d = (add . (id >< ((Cp.cond (==0) (const(1)) (const(0))) . p2)))
+r' d = ((Cp.cond ((==0) . p2) (const(0)) (succ . p1)) . p2) 
+c' d = ((Cp.cond (==0) (const(d)) (-1)) . p2 . p2) 
+\end{code}
+
+\begin{eqnarray*}
+\start
+     | aux d = cataNat (split (either (const(0)) (q' d)) (either (const(0)) (r' d)) (either (const(d)) (c' d)) ) |
+%
+\just\equiv{ (28) duas vezes }
+%
+     | aux d = cataNat (either (split (const(0)) (split (const(0)) (const(d)))) (split (q' d) (split (r' d) (c' d)))) |
+\qed
+\end{eqnarray*}
+
+Seja |g d = (split (q' d) (split (r' d) (c' d)))|. Pelo tipo de |aux d = split (q d) (split (r d) (c d))|:
+
+\begin{eqnarray*}
+\xymatrix@@C=2cm{
+    |Nat0|
+          \ar[d]_-{|aux d|}
+&
+    |1 + Nat0 >< (Nat0 >< Nat0)|
+          \ar[d]^{|id + split (q d) (split (r d) (c d))|}
+          \ar[l]_-{|inNat|}
+\\
+    |Nat0|
+&
+     |1 + Nat0 >< (Nat0 >< Nat0)|
+          \ar[l]^{|either (split (const(0)) (split (const(0)) (const(d)))) (g d)|}
+}
+\end{eqnarray*}
+
+Deduzimos o tipo de |g d :: Nat0 >< (Nat0 >< Nat0) -> Nat0 >< (Nat0 >< Nat0)|. Assim, podemos definir |g d| de forma |point-wise|,
+com pares |(q, (r,c))| pertencentes a |Nat0 >< (Nat0 >< Nat0)|. Vemos pelas definições de cada função que faz parte de |g d| que
+todas elas têm comportamentos distintos para o caso de |c| ser igual a |0| ou de ser diferente. Desse modo, podemos definir |g d|
+por esses dois casos, ou seja, se |g d| receber |(q, (r, 0))| ou se receber |(q, (r, c+1))|, o que determina completamente o domínio da função,
+já que |c| pertence a |Nat0|. 
+Assim, tendo em conta que |g d (q, (r, c)) = (q' d (q, (r, c)), (r' d (q, (r, c)), c' d (q, (r, c))))| pela regra (76):
+\begin{eqnarray*}
+\start
+     |lcbr(
+          g d (q, (r, 0)) = (q+1, (0, d))
+     )(
+          g d (q, (r, c+1)) = (q, (r+1, c))
+     )|
+\qed
+\end{eqnarray*}
+
+Concluindo:
+
+\begin{eqnarray*}
+\start
+     | aux d = cataNat (either (split (const(0)) (split (const(0)) (const(d)))) (split (q' d) (split (r' d) (c' d)))) |
+%
+\just\equiv{def (|g d|), ficha 3}
+%
+     | aux d = cataNat (either (const((0,(0,d)))) (g d)) |
+%
+\just\equiv{def for}
+%
+     | aux d = (g d) (0,(0,d))|
+%
+\just\equiv{def (|loop d|)}
+%
+     | aux d = loop d|
+\qed
+\end{eqnarray*}
 
 \subsection*{Problema 2}
 
@@ -999,12 +1082,12 @@ Ficamos então com:
 
 \begin{code}
 alice :: Ord c => LTree c -> c
-alice.Leaf = id
-alice.Fork = (uncurry max).(bob >< bob) 
+alice (Leaf a) = id a
+alice (Fork (l,r)) = ((uncurry max) . (bob >< bob)) (l,r)
 
 bob :: Ord c => LTree c -> c
-bob.Leaf = id
-bob.Fork = (uncurry min).(alice >< alice)    
+bob (Leaf a) = id a
+bob (Fork (l,r)) = ((uncurry min) . (alice >< alice)) (l,r)
 
 both :: Ord d => LTree d -> (d, d)
 both = cataLTree (split (either id (uncurry max.(p2 >< p2))) (either id (uncurry min.(p1 >< p1))))
@@ -1105,7 +1188,7 @@ Ambas estes passos podem ser compostos na função |g2|, definida na solução, 
 %
 \just ={(72); (77); (1)}
 %
-     |(g1) (f a, b)|
+     |g1 (f a, b)|
 \qed
 \end{eqnarray*}
 

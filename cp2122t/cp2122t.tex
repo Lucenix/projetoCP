@@ -1186,7 +1186,8 @@ Por estudo e aplicação da regra prática no anexo \ref{sec:mr}, entendemos que
 para chegarmos à definição apresentada, devemos ter em conta os condicionais em cada uma das funções.
 
 Para determinar \ensuremath{\Varid{aux}\;\Varid{d}\mathrel{=}\conj{\Varid{q}\;\Varid{d}}{\conj{\Varid{r}\;\Varid{d}}{\Varid{c}\;\Varid{d}}}} é necessário determinar cada uma das funções
-de tal forma que se possa utilizar a regra \ensuremath{\Conid{Fokkinga}}.
+de tal forma que se possa utilizar a regra de \ensuremath{\Conid{Fokkinga}}. O functor aplicável neste caso é o functor de naturais,
+isto é, \ensuremath{\Conid{F}\;\Varid{f}\mathrel{=}\Varid{id}\mathbin{+}\Varid{f}}. Nesse sentido, \ensuremath{\Conid{F}\;\conj{\Varid{q}\;\Varid{d}}{\conj{\Varid{r}\;\Varid{d}}{\Varid{c}\;\Varid{d}}}\mathrel{=}\Varid{id}\mathbin{+}\conj{\Varid{q}\;\Varid{d}}{\conj{\Varid{r}\;\Varid{d}}{\Varid{c}\;\Varid{d}}}}.
 
 \begin{eqnarray*}
 \start
@@ -1198,22 +1199,101 @@ de tal forma que se possa utilizar a regra \ensuremath{\Conid{Fokkinga}}.
 %
 \just\equiv{ (84), uncurry(+) = add, (76), (72), (71) }
 %
-     \ensuremath{\begin{lcbr}(\Varid{q}\;\Varid{d})\comp \underline{\mathrm{0}}\mathrel{=}\underline{\mathrm{0}}\\(\Varid{q}\;\Varid{d})\comp \succ \mathrel{=}\Varid{add}\;\conj{\Varid{q}\;\Varid{d}}{(\equiv \mathrm{0})\comp (\Varid{cd})\to \underline{\mathrm{1}},\underline{\mathrm{0}}}\end{lcbr}}
+     \ensuremath{\begin{lcbr}(\Varid{q}\;\Varid{d})\comp \underline{\mathrm{0}}\mathrel{=}\underline{\mathrm{0}}\\(\Varid{q}\;\Varid{d})\comp \succ \mathrel{=}\Varid{add}\comp \conj{\Varid{q}\;\Varid{d}}{(\equiv \mathrm{0})\comp (\Varid{cd})\to \underline{\mathrm{1}},\underline{\mathrm{0}}}\end{lcbr}}
 %
 \just\equiv{ (27), def inNat }
 %
-     \ensuremath{(\Varid{q}\;\Varid{d})\comp \mathsf{in}\mathrel{=}\alt{\underline{\mathrm{0}}}{\Varid{add}\;\conj{\Varid{q}\;\Varid{d}}{(\equiv \mathrm{0})\comp (\Varid{cd})\to \underline{\mathrm{1}},\underline{\mathrm{0}}}}}
+     \ensuremath{(\Varid{q}\;\Varid{d})\comp \mathsf{in}\mathrel{=}\alt{\underline{\mathrm{0}}}{\Varid{add}\comp \conj{\Varid{q}\;\Varid{d}}{(\equiv \mathrm{0})\comp (\Varid{cd})\to \underline{\mathrm{1}},\underline{\mathrm{0}}}}}
 %
-\just\equiv{ (3), (32), (7) }
+\just\equiv{ (3), (32), (7), (1)}
 %
-     \ensuremath{(\Varid{q}\;\Varid{d})\comp \mathsf{in}\mathrel{=}\alt{\underline{\mathrm{0}}}{\Varid{add}\;(\conj{\Varid{q}\;\Varid{d}}{(\equiv \mathrm{0})\to \underline{\mathrm{1}},\underline{\mathrm{0}}}\comp \p2\comp \conj{\Varid{r}\;\Varid{d}}{\Varid{c}\;\Varid{d}})}}
+     \ensuremath{(\Varid{q}\;\Varid{d})\comp \mathsf{in}\mathrel{=}\alt{\underline{\mathrm{0}}}{\Varid{add}\comp \conj{\Varid{id}\comp (\Varid{qd})}{((\equiv \mathrm{0})\to \underline{\mathrm{1}},\underline{\mathrm{0}})\comp \p2\comp \conj{\Varid{r}\;\Varid{d}}{\Varid{c}\;\Varid{d}}}}}
 %
-\just\equiv{ (11), (1), (22) }
+\just\equiv{ (11), (22) }
 %
-     \ensuremath{(\Varid{q}\;\Varid{d})\comp \mathsf{in}\mathrel{=}\alt{\underline{\mathrm{0}}}{\Varid{add}\;(\conj{\Varid{q}\;\Varid{d}}{(\equiv \mathrm{0})\to \underline{\mathrm{1}},\underline{\mathrm{0}}}\comp \p2)}\comp (\Varid{id}\mathbin{+}\conj{\Varid{qd}}{\conj{\Varid{rd}}{\Varid{cd}}})}
+     \ensuremath{(\Varid{q}\;\Varid{d})\comp \mathsf{in}\mathrel{=}\alt{\underline{\mathrm{0}}}{\Varid{add}\comp (\Varid{id}\times(((\equiv \mathrm{0})\to \underline{\mathrm{1}},\underline{\mathrm{0}})\comp \p2))}\comp (\Varid{id}\mathbin{+}\conj{\Varid{q}\;\Varid{d}}{\conj{\Varid{r}\;\Varid{d}}{\Varid{c}\;\Varid{d}}})}
 \qed
 \end{eqnarray*}
 
+Analogamente, consegue-se chegar às definições de \ensuremath{\Varid{r}\;\Varid{d}} e de \ensuremath{\Varid{c}\;\Varid{d}}:
+
+\begin{eqnarray*}
+\start
+     \ensuremath{\begin{lcbr}(\Varid{r}\;\Varid{d})\comp \mathsf{in}\mathrel{=}\alt{\underline{\mathrm{0}}}{((\equiv \mathrm{0})\comp \p2\to \underline{\mathrm{0}},\succ \comp \p1)\comp \p2}\comp (\Varid{id}\mathbin{+}\conj{\Varid{q}\;\Varid{d}}{\conj{\Varid{r}\;\Varid{d}}{\Varid{c}\;\Varid{d}}})\\(\Varid{c}\;\Varid{d})\comp \mathsf{in}\mathrel{=}\alt{\underline{\Varid{d}}}{((\equiv \mathrm{0})\to \underline{\Varid{d}},(\mathbin{-}\mathrm{1}))\comp \p2\comp \p2}\comp (\Varid{id}\mathbin{+}\conj{\Varid{q}\;\Varid{d}}{\conj{\Varid{r}\;\Varid{d}}{\Varid{c}\;\Varid{d}}})\end{lcbr}}
+\qed
+\end{eqnarray*}
+
+Aplicando a regra de \ensuremath{\Conid{Fokkinga}}, para \ensuremath{\Varid{aux}\;\Varid{d}\mathrel{=}\conj{\Varid{q}\;\Varid{d}}{\conj{\Varid{r}\;\Varid{d}}{\Varid{c}\;\Varid{d}}}} e com:
+\begin{hscode}\SaveRestoreHook
+\column{B}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{E}{@{}>{\hspre}l<{\hspost}@{}}%
+\>[B]{}\Varid{q'}\;\Varid{d}\mathrel{=}(\Varid{add}\comp (\Varid{id}\times((\Varid{\Conid{Cp}.cond}\;(\equiv \mathrm{0})\;\underline{\mathrm{1}}\;\underline{\mathrm{0}})\comp \p2))){}\<[E]%
+\\
+\>[B]{}\Varid{r'}\;\Varid{d}\mathrel{=}((\Varid{\Conid{Cp}.cond}\;((\equiv \mathrm{0})\comp \p2)\;\underline{\mathrm{0}}\;(\succ \comp \p1))\comp \p2){}\<[E]%
+\\
+\>[B]{}\Varid{c'}\;\Varid{d}\mathrel{=}((\Varid{\Conid{Cp}.cond}\;(\equiv \mathrm{0})\;\underline{\Varid{d}}\;(\mathbin{-}\mathrm{1}))\comp \p2\comp \p2){}\<[E]%
+\ColumnHook
+\end{hscode}\resethooks
+
+\begin{eqnarray*}
+\start
+     \ensuremath{\Varid{aux}\;\Varid{d}\mathrel{=}\cataNat{\conj{\alt{\underline{\mathrm{0}}}{\Varid{q'}\;\Varid{d}}}{\alt{\underline{\mathrm{0}}}{\Varid{r'}\;\Varid{d}}}\;\alt{\underline{\Varid{d}}}{\Varid{c'}\;\Varid{d}}}}
+%
+\just\equiv{ (28) duas vezes }
+%
+     \ensuremath{\Varid{aux}\;\Varid{d}\mathrel{=}\cataNat{\alt{\conj{\underline{\mathrm{0}}}{\conj{\underline{\mathrm{0}}}{\underline{\Varid{d}}}}}{\conj{\Varid{q'}\;\Varid{d}}{\conj{\Varid{r'}\;\Varid{d}}{\Varid{c'}\;\Varid{d}}}}}}
+\qed
+\end{eqnarray*}
+
+Seja \ensuremath{\Varid{g}\;\Varid{d}\mathrel{=}\conj{\Varid{q'}\;\Varid{d}}{\conj{\Varid{r'}\;\Varid{d}}{\Varid{c'}\;\Varid{d}}}}. Pelo tipo de \ensuremath{\Varid{aux}\;\Varid{d}\mathrel{=}\conj{\Varid{q}\;\Varid{d}}{\conj{\Varid{r}\;\Varid{d}}{\Varid{c}\;\Varid{d}}}}:
+
+\begin{eqnarray*}
+\xymatrix@C=2cm{
+    \ensuremath{\N_0}
+          \ar[d]_-{\ensuremath{\Varid{aux}\;\Varid{d}}}
+&
+    \ensuremath{\mathrm{1}\mathbin{+}\N_0\times(\N_0\times\N_0)}
+          \ar[d]^{\ensuremath{\Varid{id}\mathbin{+}\conj{\Varid{q}\;\Varid{d}}{\conj{\Varid{r}\;\Varid{d}}{\Varid{c}\;\Varid{d}}}}}
+          \ar[l]_-{\ensuremath{\mathsf{in}}}
+\\
+    \ensuremath{\N_0}
+&
+     \ensuremath{\mathrm{1}\mathbin{+}\N_0\times(\N_0\times\N_0)}
+          \ar[l]^{\ensuremath{\alt{\conj{\underline{\mathrm{0}}}{\conj{\underline{\mathrm{0}}}{\underline{\Varid{d}}}}}{\Varid{g}\;\Varid{d}}}}
+}
+\end{eqnarray*}
+
+Deduzimos o tipo de \ensuremath{\Varid{g}\;\Varid{d}\mathbin{::}\N_0\times(\N_0\times\N_0)\to \N_0\times(\N_0\times\N_0)}. Assim, podemos definir \ensuremath{\Varid{g}\;\Varid{d}} de forma \ensuremath{\Varid{point}\mathbin{-}\Varid{wise}},
+com pares \ensuremath{(\Varid{q},(\Varid{r},\Varid{c}))} pertencentes a \ensuremath{\N_0\times(\N_0\times\N_0)}. Vemos pelas definições de cada função que faz parte de \ensuremath{\Varid{g}\;\Varid{d}} que
+todas elas têm comportamentos distintos para o caso de \ensuremath{\Varid{c}} ser igual a \ensuremath{\mathrm{0}} ou de ser diferente. Desse modo, podemos definir \ensuremath{\Varid{g}\;\Varid{d}}
+por esses dois casos, ou seja, se \ensuremath{\Varid{g}\;\Varid{d}} receber \ensuremath{(\Varid{q},(\Varid{r},\mathrm{0}))} ou se receber \ensuremath{(\Varid{q},(\Varid{r},\Varid{c}\mathbin{+}\mathrm{1}))}, o que determina completamente o domínio da função,
+já que \ensuremath{\Varid{c}} pertence a \ensuremath{\N_0}. 
+Assim, tendo em conta que \ensuremath{\Varid{g}\;\Varid{d}\;(\Varid{q},(\Varid{r},\Varid{c}))\mathrel{=}(\Varid{q'}\;\Varid{d}\;(\Varid{q},(\Varid{r},\Varid{c})),(\Varid{r'}\;\Varid{d}\;(\Varid{q},(\Varid{r},\Varid{c})),\Varid{c'}\;\Varid{d}\;(\Varid{q},(\Varid{r},\Varid{c}))))} pela regra (76):
+\begin{eqnarray*}
+\start
+     \ensuremath{\begin{lcbr}\Varid{g}\;\Varid{d}\;(\Varid{q},(\Varid{r},\mathrm{0}))\mathrel{=}(\Varid{q}\mathbin{+}\mathrm{1},(\mathrm{0},\Varid{d}))\\\Varid{g}\;\Varid{d}\;(\Varid{q},(\Varid{r},\Varid{c}\mathbin{+}\mathrm{1}))\mathrel{=}(\Varid{q},(\Varid{r}\mathbin{+}\mathrm{1},\Varid{c}))\end{lcbr}}
+\qed
+\end{eqnarray*}
+
+Concluindo:
+
+\begin{eqnarray*}
+\start
+     \ensuremath{\Varid{aux}\;\Varid{d}\mathrel{=}\cataNat{\alt{\conj{\underline{\mathrm{0}}}{\conj{\underline{\mathrm{0}}}{\underline{\Varid{d}}}}}{\conj{\Varid{q'}\;\Varid{d}}{\conj{\Varid{r'}\;\Varid{d}}{\Varid{c'}\;\Varid{d}}}}}}
+%
+\just\equiv{def (\ensuremath{\Varid{g}\;\Varid{d}}), ficha 3}
+%
+     \ensuremath{\Varid{aux}\;\Varid{d}\mathrel{=}\cataNat{\alt{\underline{(\mathrm{0},(\mathrm{0},\Varid{d}))}}{\Varid{g}\;\Varid{d}}}}
+%
+\just\equiv{def for}
+%
+     \ensuremath{\Varid{aux}\;\Varid{d}\mathrel{=}(\Varid{g}\;\Varid{d})\;(\mathrm{0},(\mathrm{0},\Varid{d}))}
+%
+\just\equiv{def (\ensuremath{\Varid{loop}\;\Varid{d}})}
+%
+     \ensuremath{\Varid{aux}\;\Varid{d}\mathrel{=}\Varid{loop}\;\Varid{d}}
+\qed
+\end{eqnarray*}
 
 \subsection*{Problema 2}
 
@@ -1277,15 +1357,15 @@ Ficamos então com:
 \column{E}{@{}>{\hspre}l<{\hspost}@{}}%
 \>[B]{}\Varid{alice}\mathbin{::}\Conid{Ord}\;\Varid{c}\Rightarrow {\LTree}\;\Varid{c}\to \Varid{c}{}\<[E]%
 \\
-\>[B]{}\Varid{alice}\comp \Conid{Leaf}\mathrel{=}\Varid{id}{}\<[E]%
+\>[B]{}\Varid{alice}\;(\Conid{Leaf}\;\Varid{a})\mathrel{=}\Varid{id}\;\Varid{a}{}\<[E]%
 \\
-\>[B]{}\Varid{alice}\comp \Conid{Fork}\mathrel{=}\uncurry{\Varid{max}}\comp (\Varid{bob}\times\Varid{bob}){}\<[E]%
+\>[B]{}\Varid{alice}\;(\Conid{Fork}\;(\Varid{l},\Varid{r}))\mathrel{=}(\uncurry{\Varid{max}}\comp (\Varid{bob}\times\Varid{bob}))\;(\Varid{l},\Varid{r}){}\<[E]%
 \\[\blanklineskip]%
 \>[B]{}\Varid{bob}\mathbin{::}\Conid{Ord}\;\Varid{c}\Rightarrow {\LTree}\;\Varid{c}\to \Varid{c}{}\<[E]%
 \\
-\>[B]{}\Varid{bob}\comp \Conid{Leaf}\mathrel{=}\Varid{id}{}\<[E]%
+\>[B]{}\Varid{bob}\;(\Conid{Leaf}\;\Varid{a})\mathrel{=}\Varid{id}\;\Varid{a}{}\<[E]%
 \\
-\>[B]{}\Varid{bob}\comp \Conid{Fork}\mathrel{=}\uncurry{\Varid{min}}\comp (\Varid{alice}\times\Varid{alice}){}\<[E]%
+\>[B]{}\Varid{bob}\;(\Conid{Fork}\;(\Varid{l},\Varid{r}))\mathrel{=}(\uncurry{\Varid{min}}\comp (\Varid{alice}\times\Varid{alice}))\;(\Varid{l},\Varid{r}){}\<[E]%
 \\[\blanklineskip]%
 \>[B]{}\Varid{both}\mathbin{::}\Conid{Ord}\;\Varid{d}\Rightarrow {\LTree}\;\Varid{d}\to (\Varid{d},\Varid{d}){}\<[E]%
 \\
@@ -1410,7 +1490,7 @@ Ambas estes passos podem ser compostos na função \ensuremath{g_2 }, definida n
 %
 \just ={(72); (77); (1)}
 %
-     \ensuremath{(g_1 )\;(\Varid{f}\;\Varid{a},\Varid{b})}
+     \ensuremath{g_1 \;(\Varid{f}\;\Varid{a},\Varid{b})}
 \qed
 \end{eqnarray*}
 
