@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.3) (preloaded format=pdflatex 2022.6.8)  10 JUN 2022 16:30
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.3) (preloaded format=pdflatex 2022.6.8)  10 JUN 2022 16:34
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -805,31 +805,42 @@ Try to go on, since this might almost work.
 
 \openout5 = `cp2122t.ptb'.
 
-<xymatrix 2x2 188> [11] [12]
+<xymatrix 2x2 188> [11]
 \openout5 = `cp2122t.ptb'.
+
+ [12]
+! Undefined control sequence.
+l.1374 \codificado
+                   em Haskell:
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
 
 \openout5 = `cp2122t.ptb'.
 
 \openout5 = `cp2122t.ptb'.
 
- <xymatrix 2x2 191> [13]
+\openout5 = `cp2122t.ptb'.
+
+[13] <xymatrix 2x2 191>
 \openout5 = `cp2122t.ptb'.
 
  <xymatrix 2x3 278>
 \openout5 = `cp2122t.ptb'.
 
+ [14]
 
-[14]
-
-LaTeX Warning: Command \c invalid in math mode on input line 1552.
+LaTeX Warning: Command \c invalid in math mode on input line 1560.
 
 
-LaTeX Warning: Command \~ invalid in math mode on input line 1552.
+LaTeX Warning: Command \~ invalid in math mode on input line 1560.
 
 ! Please use \mathaccent for accents in math mode.
 \add@accent ... \let \ignorespaces \relax \accent 
                                                   #1 #2\egroup \ifmmode \els...
-l.1552 ...suremath{\Varid{absorção}\mathbin{-+}}
+l.1560 ...suremath{\Varid{absorção}\mathbin{-+}}
                                                   .
 I'm changing \accent to \mathaccent here; wish me luck.
 (Accents are not the same in formulas as they are in text.)
@@ -891,7 +902,7 @@ rw/palatino/uplr8a.pfb><C:/Users/andre/AppData/Local/Programs/MiKTeX/fonts/type
 1/urw/palatino/uplri8a.pfb><C:/Users/andre/AppData/Local/Programs/MiKTeX/fonts/
 type1/public/xypic/xyatip10.pfb><C:/Users/andre/AppData/Local/Programs/MiKTeX/f
 onts/type1/public/xypic/xybtip10.pfb>
-Output written on cp2122t.pdf (17 pages, 841763 bytes).
+Output written on cp2122t.pdf (17 pages, 842051 bytes).
 PDF statistics:
  442 PDF objects out of 1000 (max. 8388607)
  68 named destinations out of 1000 (max. 500000)

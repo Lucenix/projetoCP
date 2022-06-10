@@ -315,7 +315,7 @@ a94956 & André Lucena Ribas Ferreira
 \\
 a22222 & Nome2 (preencher)
 \\
-a33333 & Nome3 (preencher)
+a97485 & Gonçalo Manuel Maia de Sousa
 \end{tabular}
 \end{center}
 
@@ -1297,6 +1297,26 @@ Concluindo:
 
 \subsection*{Problema 2}
 
+Na resolução deste problema resolvemos definir inicialmente as funções \ensuremath{\Varid{alice}}, a que chamamos \ensuremath{\Varid{a}} e \ensuremath{\Varid{bob}}, a que chamamos \ensuremath{\Varid{b}}.
+Definimos \ensuremath{\Varid{alice}} e \ensuremath{\Varid{bob}} inicialmente em modo pointwise tal que:
+
+\begin{hscode}\SaveRestoreHook
+\column{B}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{E}{@{}>{\hspre}l<{\hspost}@{}}%
+\>[B]{}\Varid{alice}\mathbin{::}\Conid{Ord}\;\Varid{c}\Rightarrow {\LTree}\;\Varid{c}\to \Varid{c}{}\<[E]%
+\\
+\>[B]{}\Varid{alice}\;(\Conid{Leaf}\;\Varid{x})\mathrel{=}\Varid{id}\;\Varid{x}{}\<[E]%
+\\
+\>[B]{}\Varid{alice}\;(\Conid{Fork}\;(\Varid{t1},\Varid{t2}))\mathrel{=}(\uncurry{\Varid{max}}\comp (\Varid{bob}\times\Varid{bob}))\;(\Varid{t1},\Varid{t2}){}\<[E]%
+\\[\blanklineskip]%
+\>[B]{}\Varid{bob}\mathbin{::}\Conid{Ord}\;\Varid{c}\Rightarrow {\LTree}\;\Varid{c}\to \Varid{c}{}\<[E]%
+\\
+\>[B]{}\Varid{bob}\;(\Conid{Leaf}\;\Varid{x})\mathrel{=}\Varid{id}\;\Varid{x}{}\<[E]%
+\\
+\>[B]{}\Varid{bob}\;(\Conid{Fork}\;(\Varid{t1},\Varid{t2}))\mathrel{=}(\uncurry{\Varid{min}}\comp (\Varid{alice}\times\Varid{alice}))\;(\Varid{t1},\Varid{t2}){}\<[E]%
+\ColumnHook
+\end{hscode}\resethooks
+Procuramos agora manipular estas definições para que seja possivel aplicar a lei \ensuremath{\Conid{Fokkinga}}.
 \begin{eqnarray*}
 \start
      \ensuremath{\begin{lcbr}\Varid{a}\comp \Varid{leaf}\;\Varid{x}\mathrel{=}\Varid{id}\;\Varid{x}\\\Varid{a}\comp \Conid{Fork}\;(\Varid{t1},\Varid{t2})\mathrel{=}\uncurry{\Varid{max}}\;(\Varid{b}\times\Varid{b})\;(\Varid{t1},\Varid{t2})\end{lcbr}}
@@ -1351,22 +1371,10 @@ Ficamos então com:
 \qed
 \end{eqnarray*}
 
-
+\codificado em Haskell: 
 \begin{hscode}\SaveRestoreHook
 \column{B}{@{}>{\hspre}l<{\hspost}@{}}%
 \column{E}{@{}>{\hspre}l<{\hspost}@{}}%
-\>[B]{}\Varid{alice}\mathbin{::}\Conid{Ord}\;\Varid{c}\Rightarrow {\LTree}\;\Varid{c}\to \Varid{c}{}\<[E]%
-\\
-\>[B]{}\Varid{alice}\;(\Conid{Leaf}\;\Varid{a})\mathrel{=}\Varid{id}\;\Varid{a}{}\<[E]%
-\\
-\>[B]{}\Varid{alice}\;(\Conid{Fork}\;(\Varid{l},\Varid{r}))\mathrel{=}(\uncurry{\Varid{max}}\comp (\Varid{bob}\times\Varid{bob}))\;(\Varid{l},\Varid{r}){}\<[E]%
-\\[\blanklineskip]%
-\>[B]{}\Varid{bob}\mathbin{::}\Conid{Ord}\;\Varid{c}\Rightarrow {\LTree}\;\Varid{c}\to \Varid{c}{}\<[E]%
-\\
-\>[B]{}\Varid{bob}\;(\Conid{Leaf}\;\Varid{a})\mathrel{=}\Varid{id}\;\Varid{a}{}\<[E]%
-\\
-\>[B]{}\Varid{bob}\;(\Conid{Fork}\;(\Varid{l},\Varid{r}))\mathrel{=}(\uncurry{\Varid{min}}\comp (\Varid{alice}\times\Varid{alice}))\;(\Varid{l},\Varid{r}){}\<[E]%
-\\[\blanklineskip]%
 \>[B]{}\Varid{both}\mathbin{::}\Conid{Ord}\;\Varid{d}\Rightarrow {\LTree}\;\Varid{d}\to (\Varid{d},\Varid{d}){}\<[E]%
 \\
 \>[B]{}\Varid{both}\mathrel{=}\llparenthesis\, \conj{\alt{\Varid{id}}{\uncurry{\Varid{max}}\comp (\p2\times\p2)}}{\alt{\Varid{id}}{\uncurry{\Varid{min}}\comp (\p1\times\p1)}}\,\rrparenthesis{}\<[E]%
