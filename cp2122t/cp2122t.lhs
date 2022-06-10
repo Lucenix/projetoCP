@@ -157,7 +157,7 @@ a94956 & André Lucena Ribas Ferreira
 \\
 a22222 & Nome2 (preencher)
 \\
-a33333 & Nome3 (preencher)
+a97485 & Gonçalo Manuel Maia de Sousa
 \end{tabular}
 \end{center}
 
@@ -934,6 +934,19 @@ de tal forma que se possa utilizar a regra |Fokkinga|.
 
 \subsection*{Problema 2}
 
+Na resolução deste problema resolvemos definir inicialmente as funções |alice|, a que chamamos |a| e |bob|, a que chamamos |b|.
+Definimos |alice| e |bob| inicialmente em modo pointwise tal que:
+
+\begin{code}
+alice :: Ord c => LTree c -> c
+alice.Leaf x = id x
+alice.Fork (t1,t2) = (uncurry max).(bob >< bob) (t1,t2)
+
+bob :: Ord c => LTree c -> c
+bob.Leaf x = id x
+bob.Fork (t1,t2) = (uncurry min).(alice >< alice) (t1,t2)
+\end{code}   
+Procuramos agora manipular estas definições para que seja possivel aplicar a lei |Fokkinga|.
 \begin{eqnarray*}
 \start
      |lcbr(a.leaf x = id x)
@@ -996,16 +1009,8 @@ Ficamos então com:
 \qed
 \end{eqnarray*}
 
-
+\codificado em Haskell: 
 \begin{code}
-alice :: Ord c => LTree c -> c
-alice.Leaf = id
-alice.Fork = (uncurry max).(bob >< bob) 
-
-bob :: Ord c => LTree c -> c
-bob.Leaf = id
-bob.Fork = (uncurry min).(alice >< alice)    
-
 both :: Ord d => LTree d -> (d, d)
 both = cataLTree (split (either id (uncurry max.(p2 >< p2))) (either id (uncurry min.(p1 >< p1))))
 \end{code}
