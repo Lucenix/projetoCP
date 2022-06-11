@@ -151,7 +151,7 @@
 
 \begin{center}\large
 \begin{tabular}{ll}
-\textbf{Grupo} nr. & 53 (preencher)
+\textbf{Grupo} nr. & 53
 \\\hline
 a94956 & André Lucena Ribas Ferreira
 \\
@@ -1172,14 +1172,15 @@ Diagramas do catamorfismo e anamorfismo:
 
 \subsection*{Problema 4}
 
-A função |propagate| deve aplicar |f :: Monad m => (t -> m a)| a todos os elementos da lista de entrada, tal como um |map|, 
-enquanto coleta todos os resultados monádicos, de forma tal que se agrupem numa única estrutura 
-monádica aplicada a uma lista, ao invés de uma lista de estruturas do mesmo tipo de saída de |f|.
+A função |propagate| tem como objetivo aplicar |f :: Monad m => (t -> m a)| a todos os elementos da lista de entrada, analogamente a um |map|.
+Ao contrário dessa função, esta deve coletar todos os resultados em estrutura monádica dessa aplicação numa só estrutura
+aplicada a uma lista, |Dist [Bit]|, ao invés de uma lista de estruturas do mesmo tipo de saída de |f|, [Dist Bit].
 Então, para se definir a função |propagate| é necessário definir o seu comportamento, depois de receber a função |f|.
 Renomeie-se os tipos das funções tais que |t == A| e |a == B|.
 Assim, para definir corretamente a função |propagate f| é necessário conhecer qual o gene do seu catamorfismo, 
-uma função que obtenha |M B^{*}| a partir de |1 + A >< M B^{*}|. 
-Por um lado, a função |f| obtém |M B| a partir do elemento da cabeça da lista |A|, chegando então a |1 + M B >< M B^{*}|.
+uma função que obtenha |M [B]| a partir de |1 + A >< M [B]|. 
+
+Por um lado, a função |f| obtém |M B| a partir do elemento da cabeça da lista |A|, chegando então a |1 + M B >< M [B]|.
 Por outro lado, pretendemos concatenar o resultado |B|, retirando-lhe o mónade momentaneamente, 
 ao resultado de aplicar a chamada recursiva à cauda, nomeadamente a função |monad_cons| que retira do mónade os elementos do par
 e devolve a concatenação no mónade, utilizando |return|.
@@ -1189,25 +1190,26 @@ monad_cons :: Monad m => (m a, m [a]) -> m [a]
 monad_cons (a,b) = do {x <- a; y <- b; return (x:y)}
 \end{code}
 
-Ambas estes passos podem ser compostos na função |g2|, definida na solução, que aplica |f| ao elemento à cabeça antes de o concatenar, por absorção.
+Ambas estes passos podem ser compostos na função |g2|, definida na solução, 
+que aplica |f| ao elemento à cabeça antes de o concatenar, por absorção.
 
 \begin{eqnarray*}
 \start
-     |g2 = (either (return . nil) (g1)) . (id + f >< id)|
+     |g2 f = (either (return . nil) (monad_cons)) . (id + f >< id)|
 %
 \just\equiv{(22); (1)}
 %
-     |g2 = either (return . nil) (g1 . (f >< id))|
+     |g2 f = either (return . nil) (monad_cons . (f >< id))|
 \qed
 \end{eqnarray*}
 
 \begin{eqnarray*}
 \start
-     |(g1 . (f >< id)) (a,b)|
+     |(monad_cons . (f >< id)) (a,b)|
 %
 \just ={(72); (77); (1)}
 %
-     |g1 (f a, b)|
+     |monad_cons (f a, b)|
 \qed
 \end{eqnarray*}
 

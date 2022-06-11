@@ -309,7 +309,7 @@
 
 \begin{center}\large
 \begin{tabular}{ll}
-\textbf{Grupo} nr. & 53 (preencher)
+\textbf{Grupo} nr. & 53
 \\\hline
 a94956 & André Lucena Ribas Ferreira
 \\
@@ -1180,8 +1180,6 @@ simples e elegantes.
 
 \subsection*{Problema 1} \label{pg:P1}
 
-Apresentar cálculos aqui, se desejável acompanhados de diagramas, etc.
-
 Por estudo e aplicação da regra prática no anexo \ref{sec:mr}, entendemos que, 
 para chegarmos à definição apresentada, devemos ter em conta os condicionais em cada uma das funções.
 
@@ -1193,7 +1191,7 @@ isto é, \ensuremath{\Conid{F}\;\Varid{f}\mathrel{=}\Varid{id}\mathbin{+}\Varid{
 \start
         \ensuremath{\begin{lcbr}\Varid{q}\;\Varid{d}\;\mathrm{0}\mathrel{=}\mathrm{0}\\\Varid{q}\;\Varid{d}\;(\Varid{n}\mathbin{+}\mathrm{1})\mathrel{=}\Varid{q}\;\Varid{d}\;\Varid{n}\mathbin{+}(\Varid{x}\equiv \mathrm{0})\to \mathrm{1},\mathrm{0}\;\mathbf{where}\;\Varid{x}\mathrel{=}\Varid{c}\;\Varid{d}\;\Varid{n}\end{lcbr}}
 %
-\just\equiv{ (72), (74), (71); (72), (78), substituir x, def succ }
+\just\equiv{ (72), (74), (71); (72), (78), substituir \ensuremath{\Varid{x}}, def succ }
 %
         \ensuremath{\begin{lcbr}(\Varid{q}\;\Varid{d})\comp \underline{\mathrm{0}}\mathrel{=}\underline{\mathrm{0}}\\((\Varid{q}\;\Varid{d})\comp \succ )\;\Varid{n}\mathrel{=}(\Varid{q}\;\Varid{d})\;\Varid{n}\mathbin{+}((\equiv \mathrm{0})\;(\Varid{c}\;\Varid{d}\;\Varid{n})\to \mathrm{1},\mathrm{0})\end{lcbr}}
 %
@@ -1287,7 +1285,7 @@ Concluindo:
 %
 \just\equiv{def for}
 %
-     \ensuremath{\Varid{aux}\;\Varid{d}\mathrel{=}(\Varid{g}\;\Varid{d})\;(\mathrm{0},(\mathrm{0},\Varid{d}))}
+     \ensuremath{\Varid{aux}\;\Varid{d}\mathrel{=}\for{\Varid{g}\;\Varid{d}}\ {\mathrm{0},(\mathrm{0},\Varid{d})}}
 %
 \just\equiv{def (\ensuremath{\Varid{loop}\;\Varid{d}})}
 %
@@ -1327,7 +1325,7 @@ Procuramos agora manipular estas definições para que seja possivel aplicar a l
 %
 \just\equiv{(27)}
 %
-     \ensuremath{\alt{\Varid{a}}{\cdot }\comp \Conid{Leaf}\;\Varid{a}\comp \Conid{Fork}\mathrel{=}\alt{\Varid{id}}{\uncurry{\Varid{max}}}\comp (\Varid{b}\times\Varid{b})}
+     \ensuremath{\alt{\Varid{a}\comp \Conid{Leaf}}{\Varid{a}\comp \Conid{Fork}}\mathrel{=}\alt{\Varid{id}}{\uncurry{\Varid{max}}}\comp (\Varid{b}\times\Varid{b})}
 %
 \just\equiv{(20)}
 %
@@ -1475,14 +1473,15 @@ Diagramas do catamorfismo e anamorfismo:
 
 \subsection*{Problema 4}
 
-A função \ensuremath{\Varid{propagate}} deve aplicar \ensuremath{\Varid{f}\mathbin{::}\Conid{Monad}\;\Varid{m}\Rightarrow (\Varid{t}\to \Varid{m}\;\Varid{a})} a todos os elementos da lista de entrada, tal como um \ensuremath{\map }, 
-enquanto coleta todos os resultados monádicos, de forma tal que se agrupem numa única estrutura 
-monádica aplicada a uma lista, ao invés de uma lista de estruturas do mesmo tipo de saída de \ensuremath{\Varid{f}}.
+A função \ensuremath{\Varid{propagate}} tem como objetivo aplicar \ensuremath{\Varid{f}\mathbin{::}\Conid{Monad}\;\Varid{m}\Rightarrow (\Varid{t}\to \Varid{m}\;\Varid{a})} a todos os elementos da lista de entrada, analogamente a um \ensuremath{\map }.
+Ao contrário dessa função, esta deve coletar todos os resultados em estrutura monádica dessa aplicação numa só estrutura
+aplicada a uma lista, \ensuremath{\fun{Dist}\;[\mskip1.5mu \Conid{Bit}\mskip1.5mu]}, ao invés de uma lista de estruturas do mesmo tipo de saída de \ensuremath{\Varid{f}}, [Dist Bit].
 Então, para se definir a função \ensuremath{\Varid{propagate}} é necessário definir o seu comportamento, depois de receber a função \ensuremath{\Varid{f}}.
 Renomeie-se os tipos das funções tais que \ensuremath{\Varid{t}\equiv \Conid{A}} e \ensuremath{\Varid{a}\equiv \mathit B}.
 Assim, para definir corretamente a função \ensuremath{\Varid{propagate}\;\Varid{f}} é necessário conhecer qual o gene do seu catamorfismo, 
-uma função que obtenha \ensuremath{\Conid{M}\;\mathit B\mathbin{\uparrow}\{\mskip1.5mu \mathbin{*}\mskip1.5mu\}} a partir de \ensuremath{\mathrm{1}\mathbin{+}\Conid{A}\times\Conid{M}\;\mathit B\mathbin{\uparrow}\{\mskip1.5mu \mathbin{*}\mskip1.5mu\}}. 
-Por um lado, a função \ensuremath{\Varid{f}} obtém \ensuremath{\Conid{M}\;\mathit B} a partir do elemento da cabeça da lista \ensuremath{\Conid{A}}, chegando então a \ensuremath{\mathrm{1}\mathbin{+}\Conid{M}\;\mathit B\times\Conid{M}\;\mathit B\mathbin{\uparrow}\{\mskip1.5mu \mathbin{*}\mskip1.5mu\}}.
+uma função que obtenha \ensuremath{\Conid{M}\;[\mskip1.5mu \mathit B\mskip1.5mu]} a partir de \ensuremath{\mathrm{1}\mathbin{+}\Conid{A}\times\Conid{M}\;[\mskip1.5mu \mathit B\mskip1.5mu]}. 
+
+Por um lado, a função \ensuremath{\Varid{f}} obtém \ensuremath{\Conid{M}\;\mathit B} a partir do elemento da cabeça da lista \ensuremath{\Conid{A}}, chegando então a \ensuremath{\mathrm{1}\mathbin{+}\Conid{M}\;\mathit B\times\Conid{M}\;[\mskip1.5mu \mathit B\mskip1.5mu]}.
 Por outro lado, pretendemos concatenar o resultado \ensuremath{\mathit B}, retirando-lhe o mónade momentaneamente, 
 ao resultado de aplicar a chamada recursiva à cauda, nomeadamente a função \ensuremath{\Varid{monad\char95 cons}} que retira do mónade os elementos do par
 e devolve a concatenação no mónade, utilizando \ensuremath{\Varid{return}}.
@@ -1496,25 +1495,26 @@ e devolve a concatenação no mónade, utilizando \ensuremath{\Varid{return}}.
 \ColumnHook
 \end{hscode}\resethooks
 
-Ambas estes passos podem ser compostos na função \ensuremath{g_2 }, definida na solução, que aplica \ensuremath{\Varid{f}} ao elemento à cabeça antes de o concatenar, por absorção.
+Ambas estes passos podem ser compostos na função \ensuremath{g_2 }, definida na solução, 
+que aplica \ensuremath{\Varid{f}} ao elemento à cabeça antes de o concatenar, por absorção.
 
 \begin{eqnarray*}
 \start
-     \ensuremath{g_2 \mathrel{=}\alt{\Varid{return}\comp \Varid{nil}}{g_1 }\comp (\Varid{id}\mathbin{+}\Varid{f}\times\Varid{id})}
+     \ensuremath{g_2 \mathrel{=}\alt{\Varid{return}\comp \Varid{nil}}{\Varid{monad\char95 cons}}\comp (\Varid{id}\mathbin{+}\Varid{f}\times\Varid{id})}
 %
 \just\equiv{(22); (1)}
 %
-     \ensuremath{g_2 \mathrel{=}\alt{\Varid{return}\comp \Varid{nil}}{g_1 \comp (\Varid{f}\times\Varid{id})}}
+     \ensuremath{g_2 \mathrel{=}\alt{\Varid{return}\comp \Varid{nil}}{\Varid{monad\char95 cons}\comp (\Varid{f}\times\Varid{id})}}
 \qed
 \end{eqnarray*}
 
 \begin{eqnarray*}
 \start
-     \ensuremath{(g_1 \comp (\Varid{f}\times\Varid{id}))\;(\Varid{a},\Varid{b})}
+     \ensuremath{(\Varid{monad\char95 cons}\comp (\Varid{f}\times\Varid{id}))\;(\Varid{a},\Varid{b})}
 %
 \just ={(72); (77); (1)}
 %
-     \ensuremath{g_1 \;(\Varid{f}\;\Varid{a},\Varid{b})}
+     \ensuremath{\Varid{monad\char95 cons}\;(\Varid{f}\;\Varid{a},\Varid{b})}
 \qed
 \end{eqnarray*}
 
