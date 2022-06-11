@@ -1325,31 +1325,31 @@ Procuramos agora manipular estas definições para que seja possivel aplicar a l
 %
 \just\equiv{(27)}
 %
-     \ensuremath{\alt{\Varid{a}\comp \Conid{Leaf}}{\Varid{a}\comp \Conid{Fork}}\mathrel{=}\alt{\Varid{id}}{\uncurry{\Varid{max}}}\comp (\Varid{b}\times\Varid{b})}
+     \ensuremath{\alt{\Varid{a}\comp \Conid{Leaf}}{\Varid{a}\comp \Conid{Fork}}\mathrel{=}\alt{\Varid{id}}{\uncurry{\Varid{max}}\comp (\Varid{b}\times\Varid{b})}}
 %
 \just\equiv{(20)}
 %
-     \ensuremath{\Varid{a}\comp \alt{\Conid{Leaf}}{\Conid{Fork}}\mathrel{=}\alt{\Varid{id}}{\uncurry{\Varid{max}}}\comp (\Varid{b}\times\Varid{b})}
+     \ensuremath{\Varid{a}\comp \alt{\Conid{Leaf}}{\Conid{Fork}}\mathrel{=}\alt{\Varid{id}}{\uncurry{\Varid{max}}\comp (\Varid{b}\times\Varid{b})}}
 %
 \just\equiv{(def in)}
 %
-     \ensuremath{\Varid{a}\comp \mathbf{in}\mathrel{=}\alt{\Varid{id}}{\uncurry{\Varid{max}}}\comp (\Varid{b}\times\Varid{b})}
+     \ensuremath{\Varid{a}\comp \mathbf{in}\mathrel{=}\alt{\Varid{id}}{\uncurry{\Varid{max}}\comp (\Varid{b}\times\Varid{b})}}
 %
 \just\equiv{(1),(7)}
 %
-     \ensuremath{\Varid{a}\comp \mathbf{in}\mathrel{=}\alt{\Varid{id}}{\cdot }\comp \Varid{id}\;\uncurry{\Varid{max}}\comp (\p2\comp \conj{\Varid{a}}{\Varid{b}}\times\p2\comp \conj{\Varid{a}}{\Varid{b}})}
+     \ensuremath{\Varid{a}\comp \mathbf{in}\mathrel{=}\alt{\Varid{id}\comp \Varid{id}}{\uncurry{\Varid{max}}\comp (\p2\comp \conj{\Varid{a}}{\Varid{b}}\times\p2\comp \conj{\Varid{a}}{\Varid{b}})}}
 %
 \just\equiv{(14)}
 %
-     \ensuremath{\Varid{a}\comp \mathbf{in}\mathrel{=}\alt{\Varid{id}}{\cdot }\comp \Varid{id}\;\uncurry{\Varid{max}}\comp (\p2\times\p2)\comp (\conj{\Varid{a}}{\Varid{b}}\times\conj{\Varid{a}}{\Varid{b}})}
+     \ensuremath{\Varid{a}\comp \mathbf{in}\mathrel{=}\alt{\Varid{id}\comp \Varid{id}}{\uncurry{\Varid{max}}\comp (\p2\times\p2)\comp (\conj{\Varid{a}}{\Varid{b}}\times\conj{\Varid{a}}{\Varid{b}})}}
 %
 \just\equiv{(22)}
 %
-     \ensuremath{\Varid{a}\comp \mathbf{in}\mathrel{=}(\alt{\Varid{id}}{\uncurry{\Varid{max}}}\comp (\p2\times\p2))\comp (\Varid{id}\mathbin{+}(\conj{\Varid{a}}{\Varid{b}}\times\conj{\Varid{a}}{\Varid{b}}))}
+     \ensuremath{\Varid{a}\comp \mathbf{in}\mathrel{=}\alt{\Varid{id}}{\uncurry{\Varid{max}}\comp (\p2\times\p2)}\comp (\Varid{id}\mathbin{+}(\conj{\Varid{a}}{\Varid{b}}\times\conj{\Varid{a}}{\Varid{b}}))}
 %
 \just\equiv{(def F(split a b))}
 %
-     \ensuremath{\Varid{a}\comp \mathbf{in}\mathrel{=}\alt{\Varid{id}}{\uncurry{\Varid{max}}\;(\p2\times\p2)}\comp \Conid{F}\;\conj{\Varid{a}}{\Varid{b}}}
+     \ensuremath{\Varid{a}\comp \mathbf{in}\mathrel{=}\alt{\Varid{id}}{(\uncurry{\Varid{max}}\comp (\p2\times\p2))}\comp \Conid{F}\;\conj{\Varid{a}}{\Varid{b}}}
 \qed
 \end{eqnarray*}
 
@@ -1357,7 +1357,7 @@ O calculo para b é feito de modo inteiramente análogo.
 Ficamos então com:
 \begin{eqnarray*}
 \start
-     \ensuremath{\begin{lcbr}\Varid{a}\comp \mathbf{in}\mathrel{=}\alt{\Varid{id}}{\uncurry{\Varid{max}}\;(\p2\times\p2)}\comp \Conid{F}\;\conj{\Varid{a}}{\Varid{b}}\\\Varid{b}\comp \mathbf{in}\mathrel{=}\alt{\Varid{id}}{\uncurry{\Varid{min}}\;(\p1\times\p1)}\comp \Conid{F}\;\conj{\Varid{a}}{\Varid{b}}\end{lcbr}}
+     \ensuremath{\begin{lcbr}\Varid{a}\comp \mathbf{in}\mathrel{=}\alt{\Varid{id}}{\uncurry{\Varid{max}}\comp (\p2\times\p2)}\comp \Conid{F}\;\conj{\Varid{a}}{\Varid{b}}\\\Varid{b}\comp \mathbf{in}\mathrel{=}\alt{\Varid{id}}{\uncurry{\Varid{min}}\comp (\p1\times\p1)}\comp \Conid{F}\;\conj{\Varid{a}}{\Varid{b}}\end{lcbr}}
 %
 \just\equiv{(52)}
 %
@@ -1448,9 +1448,9 @@ Diagramas do catamorfismo e anamorfismo:
            \ar[d]^{\ensuremath{\Varid{id}\mathbin{+}((g_1 \;\Varid{x}\;g_1 )\;\Varid{x}\;g_1 )}}
            \ar[l]_-{\ensuremath{\Varid{inLTree3}}}
 \\
-     \ensuremath{\Conid{Tri}\mathbin{*}}
+     \ensuremath{[\mskip1.5mu \Conid{Tri}\mskip1.5mu]}
 &
-     \ensuremath{\Conid{Tri}\mathbin{+}((\Conid{Tri}\mathbin{*}\Varid{x}\;\Conid{Tri}\mathbin{*}),\Conid{Tri}\mathbin{*})}
+     \ensuremath{\Conid{Tri}\mathbin{+}(([\mskip1.5mu \Conid{Tri}\mskip1.5mu]\;\Varid{x}\;[\mskip1.5mu \Conid{Tri}\mskip1.5mu]),[\mskip1.5mu \Conid{Tri}\mskip1.5mu])}
            \ar[l]^-{\ensuremath{g_1 }}
 }
 
@@ -1464,7 +1464,7 @@ Diagramas do catamorfismo e anamorfismo:
 \\
      \ensuremath{\mathsf{LTree3}\;\Conid{Tri}}
 &
-     \ensuremath{\Conid{Tri}\mathbin{+}((\Conid{Tri}\mathbin{*}\Varid{x}\;\Conid{Tri}\mathbin{*}),\Conid{Tri}\mathbin{*})}
+     \ensuremath{\Conid{Tri}\mathbin{+}(([\mskip1.5mu \Conid{Tri}\mskip1.5mu]\;\Varid{x}\;[\mskip1.5mu \Conid{Tri}\mskip1.5mu]),[\mskip1.5mu \Conid{Tri}\mskip1.5mu])}
            \ar[l]^-{\ensuremath{\Varid{inLTree3}}}
 }
 
@@ -1500,11 +1500,11 @@ que aplica \ensuremath{\Varid{f}} ao elemento à cabeça antes de o concatenar, 
 
 \begin{eqnarray*}
 \start
-     \ensuremath{g_2 \mathrel{=}\alt{\Varid{return}\comp \Varid{nil}}{\Varid{monad\char95 cons}}\comp (\Varid{id}\mathbin{+}\Varid{f}\times\Varid{id})}
+     \ensuremath{g_2 \;\Varid{f}\mathrel{=}\alt{\Varid{return}\comp \Varid{nil}}{\Varid{monad\char95 cons}}\comp (\Varid{id}\mathbin{+}\Varid{f}\times\Varid{id})}
 %
 \just\equiv{(22); (1)}
 %
-     \ensuremath{g_2 \mathrel{=}\alt{\Varid{return}\comp \Varid{nil}}{\Varid{monad\char95 cons}\comp (\Varid{f}\times\Varid{id})}}
+     \ensuremath{g_2 \;\Varid{f}\mathrel{=}\alt{\Varid{return}\comp \Varid{nil}}{\Varid{monad\char95 cons}\comp (\Varid{f}\times\Varid{id})}}
 \qed
 \end{eqnarray*}
 
