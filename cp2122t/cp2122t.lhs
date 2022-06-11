@@ -1097,7 +1097,15 @@ both = cataLTree (split (either (id) ((uncurry max).(p2 >< p2))) (either (id) (u
 \end{code}
 
 \subsection*{Problema 3}
-
+Resolução do in:
+Como Nodo é curried e queremos passar para um par com um par e um elemento, temos de fazer uncurry após uncurry,
+uma LTree3 por definição ou é apenas um Tri ou é um Nodo Tri Tri Tri, logo usamos um either.
+Resolução do out:
+Como temos um either, vamos ter que usar as funções i1 e i2, no caso de ser um Tri basta inserir i1 t, no caso de ser um Nodo de 3 Tri
+, inserimos o par com um par e um elemento, basta inserir os elementos a b c na forma ((a,b),c).
+Resolução do restante:
+As recLTree3, cataLTree3, anaLTree3 e hyloLTree3 são funções iguais às funções de outras bibliotecas e o baseLTree3 foi feito de acordo
+com o tipo, como o bifuntor B(X,Y) = X -|- ((Y >< Y) >< Y), o baseLTree3 f g = f -|- ((g >< g) >< g).
 Biblioteca |LTree3|:
 
 \begin{code}
