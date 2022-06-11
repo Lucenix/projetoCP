@@ -1106,6 +1106,7 @@ Como temos um either, vamos ter que usar as funções i1 e i2, no caso de ser um
 Resolução do restante:
 As recLTree3, cataLTree3, anaLTree3 e hyloLTree3 são funções iguais às funções de outras bibliotecas e o baseLTree3 foi feito de acordo
 com o tipo, como o bifuntor B(X,Y) = X -|- ((Y >< Y) >< Y), o baseLTree3 f g = f -|- ((g >< g) >< g).
+
 Biblioteca |LTree3|:
 
 \begin{code}
@@ -1129,6 +1130,7 @@ hyloLTree3 f g = cataLTree3 f . anaLTree3 g
 \end{code}
 
 Genes do hilomorfismo |sierpinski|:
+
 O g1 é o gene do catamorfismo e o g2 é o gene do anamorfismo.
 Resolução do g1:
 A partir de um Tri ou ((Tri*, Tri*), Tri*), queremos obter uma lista de Tri (Tri*).
@@ -1161,6 +1163,8 @@ Diagramas do catamorfismo e anamorfismo:
            \ar[l]^-{|g1|}
 }
 
+\end{eqnarray*}
+\begin{eqnarray*}
 \xymatrix@@C=2cm{
     |Tri >< Int|
            \ar[r]_-{|g2|}
@@ -1174,10 +1178,7 @@ Diagramas do catamorfismo e anamorfismo:
      |Tri + (([Tri] >< [Tri]), [Tri])|
            \ar[l]^-{|inLTree3|}
 }
-
 \end{eqnarray*}
-
-
 \subsection*{Problema 4}
 
 A função |propagate| tem como objetivo aplicar |f :: Monad m => (t -> m a)| a todos os elementos da lista de entrada, analogamente a um |map|.
