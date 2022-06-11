@@ -151,11 +151,11 @@
 
 \begin{center}\large
 \begin{tabular}{ll}
-\textbf{Grupo} nr. & 99 (preencher)
+\textbf{Grupo} nr. & 53
 \\\hline
 a94956 & André Lucena Ribas Ferreira
 \\
-a22222 & Nome2 (preencher)
+a96936 & Carlos Eduardo Da Silva Machado
 \\
 a97485 & Gonçalo Manuel Maia de Sousa
 \end{tabular}
@@ -885,8 +885,6 @@ simples e elegantes.
 
 \subsection*{Problema 1} \label{pg:P1}
 
-Apresentar cálculos aqui, se desejável acompanhados de diagramas, etc.
-
 Por estudo e aplicação da regra prática no anexo \ref{sec:mr}, entendemos que, 
 para chegarmos à definição apresentada, devemos ter em conta os condicionais em cada uma das funções.
 
@@ -902,7 +900,7 @@ isto é, |F f = id + f|. Nesse sentido, |F (split (q d) (split (r d) (c d))) = i
           q d (n+1) = q d n + (x == 0) -> 1, 0 where x = c d n
      )|
 %
-\just\equiv{ (72), (74), (71); (72), (78), substituir x, def succ }
+\just\equiv{ (72), (74), (71); (72), (78), substituir |x|, def succ }
 %
         |lcbr(
           (q d) . const(0) = const(0)
@@ -1007,7 +1005,7 @@ Concluindo:
 %
 \just\equiv{def for}
 %
-     | aux d = (g d) (0,(0,d))|
+     | aux d = for (g d) (0,(0,d))|
 %
 \just\equiv{def (|loop d|)}
 %
@@ -1139,33 +1137,50 @@ g2 (((x,y),s),n) = i2 ((t1,t2),t3) where
     t3 = (((x,y+ s `div` 2), s `div` 2), n-1)
 \end{code}
 
+Diagramas do catamorfismo e anamorfismo:
 \begin{eqnarray*}
 \xymatrix@@C=2cm{
     |LTree3 Tri|
-           \ar[d]_-{|g1|}
+           \ar[d]_-{|cataLTree3 g1|}
 &
     |Tri + ((Int x Int) x Int)|
            \ar[d]^{|id + ((g1 x g1) x g1)|}
            \ar[l]_-{|inLTree3|}
 \\
-     |Tri*|
+     |[Tri]|
 &
-     |Tri + ((Tri* x Tri*), Tri*)|
+     |Tri + (([Tri] x [Tri]), [Tri])|
            \ar[l]^-{|g1|}
 }
+
+\xymatrix@@C=2cm{
+    |Tri x Int|
+           \ar[r]_-{|g2|}
+           \ar[d]_-{|anaLTree3 g2|}
+&
+    |Tri + ((Int x Int) x Int)|
+           \ar[d]^{|id + ((g2 x g2) x g2)|}
+\\
+     |LTree3 Tri|
+&
+     |Tri + (([Tri] x [Tri]), [Tri])|
+           \ar[l]^-{|inLTree3|}
+}
+
 \end{eqnarray*}
 
 
 \subsection*{Problema 4}
 
-A função |propagate| deve aplicar |f :: Monad m => (t -> m a)| a todos os elementos da lista de entrada, tal como um |map|, 
-enquanto coleta todos os resultados monádicos, de forma tal que se agrupem numa única estrutura 
-monádica aplicada a uma lista, ao invés de uma lista de estruturas do mesmo tipo de saída de |f|.
+A função |propagate| tem como objetivo aplicar |f :: Monad m => (t -> m a)| a todos os elementos da lista de entrada, analogamente a um |map|.
+Ao contrário dessa função, esta deve coletar todos os resultados em estrutura monádica dessa aplicação numa só estrutura
+aplicada a uma lista, |Dist [Bit]|, ao invés de uma lista de estruturas do mesmo tipo de saída de |f|, [Dist Bit].
 Então, para se definir a função |propagate| é necessário definir o seu comportamento, depois de receber a função |f|.
 Renomeie-se os tipos das funções tais que |t == A| e |a == B|.
 Assim, para definir corretamente a função |propagate f| é necessário conhecer qual o gene do seu catamorfismo, 
-uma função que obtenha |M B^{*}| a partir de |1 + A >< M B^{*}|. 
-Por um lado, a função |f| obtém |M B| a partir do elemento da cabeça da lista |A|, chegando então a |1 + M B >< M B^{*}|.
+uma função que obtenha |M [B]| a partir de |1 + A >< M [B]|. 
+
+Por um lado, a função |f| obtém |M B| a partir do elemento da cabeça da lista |A|, chegando então a |1 + M B >< M [B]|.
 Por outro lado, pretendemos concatenar o resultado |B|, retirando-lhe o mónade momentaneamente, 
 ao resultado de aplicar a chamada recursiva à cauda, nomeadamente a função |monad_cons| que retira do mónade os elementos do par
 e devolve a concatenação no mónade, utilizando |return|.
@@ -1175,25 +1190,26 @@ monad_cons :: Monad m => (m a, m [a]) -> m [a]
 monad_cons (a,b) = do {x <- a; y <- b; return (x:y)}
 \end{code}
 
-Ambas estes passos podem ser compostos na função |g2|, definida na solução, que aplica |f| ao elemento à cabeça antes de o concatenar, por absorção.
+Ambas estes passos podem ser compostos na função |g2|, definida na solução, 
+que aplica |f| ao elemento à cabeça antes de o concatenar, por absorção.
 
 \begin{eqnarray*}
 \start
-     |g2 = (either (return . nil) (g1)) . (id + f >< id)|
+     |g2 f = (either (return . nil) (monad_cons)) . (id + f >< id)|
 %
 \just\equiv{(22); (1)}
 %
-     |g2 = either (return . nil) (g1 . (f >< id))|
+     |g2 f = either (return . nil) (monad_cons . (f >< id))|
 \qed
 \end{eqnarray*}
 
 \begin{eqnarray*}
 \start
-     |(g1 . (f >< id)) (a,b)|
+     |(monad_cons . (f >< id)) (a,b)|
 %
 \just ={(72); (77); (1)}
 %
-     |g1 (f a, b)|
+     |monad_cons (f a, b)|
 \qed
 \end{eqnarray*}
 
