@@ -1143,27 +1143,27 @@ Diagramas do catamorfismo e anamorfismo:
     |LTree3 Tri|
            \ar[d]_-{|cataLTree3 g1|}
 &
-    |Tri + ((Int x Int) x Int)|
-           \ar[d]^{|id + ((g1 x g1) x g1)|}
+    |Tri + ((Int >< Int) >< Int)|
+           \ar[d]^{|id + ((g1 >< g1) >< g1)|}
            \ar[l]_-{|inLTree3|}
 \\
      |[Tri]|
 &
-     |Tri + (([Tri] x [Tri]), [Tri])|
+     |Tri + (([Tri] >< [Tri]), [Tri])|
            \ar[l]^-{|g1|}
 }
 
 \xymatrix@@C=2cm{
-    |Tri x Int|
+    |Tri >< Int|
            \ar[r]_-{|g2|}
            \ar[d]_-{|anaLTree3 g2|}
 &
-    |Tri + ((Int x Int) x Int)|
-           \ar[d]^{|id + ((g2 x g2) x g2)|}
+    |Tri + ((Int >< Int) >< Int)|
+           \ar[d]^{|id + ((g2 >< g2) >< g2)|}
 \\
      |LTree3 Tri|
 &
-     |Tri + (([Tri] x [Tri]), [Tri])|
+     |Tri + (([Tri] >< [Tri]), [Tri])|
            \ar[l]^-{|inLTree3|}
 }
 
