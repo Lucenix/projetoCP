@@ -1044,31 +1044,31 @@ Procuramos agora manipular estas definições para que seja possivel aplicar a l
 %
 \just\equiv{(27)}
 %
-     |either a.Leaf a.Fork = either id (uncurry max).(b >< b)|
+     |either (a.Leaf) (a.Fork) = either (id) ((uncurry max).(b >< b))|
 %
 \just\equiv{(20)}
 %
-     |a.(either Leaf Fork) = either id (uncurry max).(b >< b)|
+     |a.(either Leaf Fork) = either (id) ((uncurry max).(b >< b))|
 %
 \just\equiv{(def in)}
 %
-     |a.in = either id (uncurry max).(b >< b)|
+     |a.in = either (id) ((uncurry max).(b >< b))|
 %
 \just\equiv{(1),(7)}
 %
-     |a.in = either id.id (uncurry max).(p2.(split a b) >< p2.(split a b))|
+     |a.in = either (id.id) ((uncurry max).(p2.(split a b) >< p2.(split a b)))|
 %
 \just\equiv{(14)}
 %
-     |a.in = either id.id (uncurry max).(p2 >< p2).((split a b) >< (split a b))|
+     |a.in = either (id.id) ((uncurry max).(p2 >< p2).((split a b) >< (split a b)))|
 %
 \just\equiv{(22)}
 %
-     |a.in = (either id (uncurry max).(p2 >< p2)).(id + ((split a b) >< (split a b)))|
+     |a.in = (either (id) ((uncurry max).(p2 >< p2))).(id + ((split a b) >< (split a b)))|
 %
 \just\equiv{(def F(split a b))}
 %
-     |a.in = (either id (uncurry max (p2 >< p2))).F(split a b)|
+     |a.in = (either (id) (((uncurry max).(p2 >< p2)))).F(split a b)|
 \qed
 \end{eqnarray*}
 
@@ -1077,25 +1077,25 @@ Ficamos então com:
 \begin{eqnarray*}
 \start
      |lcbr(
-          a.in = (either id (uncurry max (p2 >< p2))).F(split a b) 
+          a.in = (either (id) ((uncurry max).(p2 >< p2))).F(split a b) 
      )(
-          b.in = (either id (uncurry min (p1 >< p1))).F(split a b)
+          b.in = (either id ((uncurry min).(p1 >< p1))).F(split a b)
      )|
 %
 \just\equiv{(52)}
 %
-     |split a b = cataLTree (split (either id (uncurry max.(p2 >< p2))) (either id (uncurry min.(p1 >< p1))))|
+     |split a b = cataLTree (split (either (id) ((uncurry max).(p2 >< p2))) (either (id) ((uncurry min).(p1 >< p1))))|
 %
 \just\equiv{both = split a b}
 %
-     |split a b = cataLTree (split (either id (uncurry max.(p2 >< p2))) (either id (uncurry min.(p1 >< p1))))|
+     |split a b = cataLTree (split (either (id) ((uncurry max).(p2 >< p2))) (either (id) ((uncurry min).(p1 >< p1))))|
 \qed
 \end{eqnarray*}
 
 \codificado em Haskell: 
 \begin{code}
 both :: Ord d => LTree d -> (d, d)
-both = cataLTree (split (either id (uncurry max.(p2 >< p2))) (either id (uncurry min.(p1 >< p1))))
+both = cataLTree (split (either (id) ((uncurry max).(p2 >< p2))) (either (id) (uncurry min.(p1 >< p1))))
 \end{code}
 
 \subsection*{Problema 3}
