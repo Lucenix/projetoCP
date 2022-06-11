@@ -151,7 +151,7 @@
 
 \begin{center}\large
 \begin{tabular}{ll}
-\textbf{Grupo} nr. & 99 (preencher)
+\textbf{Grupo} nr. & 53 (preencher)
 \\\hline
 a94956 & André Lucena Ribas Ferreira
 \\
@@ -885,8 +885,6 @@ simples e elegantes.
 
 \subsection*{Problema 1} \label{pg:P1}
 
-Apresentar cálculos aqui, se desejável acompanhados de diagramas, etc.
-
 Por estudo e aplicação da regra prática no anexo \ref{sec:mr}, entendemos que, 
 para chegarmos à definição apresentada, devemos ter em conta os condicionais em cada uma das funções.
 
@@ -902,7 +900,7 @@ isto é, |F f = id + f|. Nesse sentido, |F (split (q d) (split (r d) (c d))) = i
           q d (n+1) = q d n + (x == 0) -> 1, 0 where x = c d n
      )|
 %
-\just\equiv{ (72), (74), (71); (72), (78), substituir x, def succ }
+\just\equiv{ (72), (74), (71); (72), (78), substituir |x|, def succ }
 %
         |lcbr(
           (q d) . const(0) = const(0)
@@ -1007,7 +1005,7 @@ Concluindo:
 %
 \just\equiv{def for}
 %
-     | aux d = (g d) (0,(0,d))|
+     | aux d = for (g d) (0,(0,d))|
 %
 \just\equiv{def (|loop d|)}
 %
@@ -1044,7 +1042,7 @@ Procuramos agora manipular estas definições para que seja possivel aplicar a l
 %
 \just\equiv{(27)}
 %
-     |either a.Leaf a.Fork = either id (uncurry max).(b >< b)|
+     |either (a.Leaf) (a.Fork) = either id (uncurry max).(b >< b)|
 %
 \just\equiv{(20)}
 %

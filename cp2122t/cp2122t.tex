@@ -309,11 +309,11 @@
 
 \begin{center}\large
 \begin{tabular}{ll}
-\textbf{Grupo} nr. & 99 (preencher)
+\textbf{Grupo} nr. & 53 (preencher)
 \\\hline
 a94956 & André Lucena Ribas Ferreira
 \\
-a22222 & Nome2 (preencher)
+a96936 & Carlos Eduardo Da Silva Machado
 \\
 a97485 & Gonçalo Manuel Maia de Sousa
 \end{tabular}
@@ -1440,10 +1440,11 @@ Optamos por escreve a função em haskell pointwise e passar para pointfree.
 \ColumnHook
 \end{hscode}\resethooks
 
+Diagramas do catamorfismo e anamorfismo:
 \begin{eqnarray*}
 \xymatrix@C=2cm{
     \ensuremath{\mathsf{LTree3}\;\Conid{Tri}}
-           \ar[d]_-{\ensuremath{g_1 }}
+           \ar[d]_-{\ensuremath{\Varid{cataLTree3}\;g_1 }}
 &
     \ensuremath{\Conid{Tri}\mathbin{+}((\Conid{Int}\;\Varid{x}\;\Conid{Int})\;\Varid{x}\;\Conid{Int})}
            \ar[d]^{\ensuremath{\Varid{id}\mathbin{+}((g_1 \;\Varid{x}\;g_1 )\;\Varid{x}\;g_1 )}}
@@ -1454,6 +1455,21 @@ Optamos por escreve a função em haskell pointwise e passar para pointfree.
      \ensuremath{\Conid{Tri}\mathbin{+}((\Conid{Tri}\mathbin{*}\Varid{x}\;\Conid{Tri}\mathbin{*}),\Conid{Tri}\mathbin{*})}
            \ar[l]^-{\ensuremath{g_1 }}
 }
+
+\xymatrix@C=2cm{
+    \ensuremath{\Conid{Tri}\;\Varid{x}\;\Conid{Int}}
+           \ar[r]_-{\ensuremath{g_2 }}
+           \ar[d]_-{\ensuremath{\Varid{anaLTree3}\;g_2 }}
+&
+    \ensuremath{\Conid{Tri}\mathbin{+}((\Conid{Int}\;\Varid{x}\;\Conid{Int})\;\Varid{x}\;\Conid{Int})}
+           \ar[d]^{\ensuremath{\Varid{id}\mathbin{+}((g_2 \;\Varid{x}\;g_2 )\;\Varid{x}\;g_2 )}}
+\\
+     \ensuremath{\mathsf{LTree3}\;\Conid{Tri}}
+&
+     \ensuremath{\Conid{Tri}\mathbin{+}((\Conid{Tri}\mathbin{*}\Varid{x}\;\Conid{Tri}\mathbin{*}),\Conid{Tri}\mathbin{*})}
+           \ar[l]^-{\ensuremath{\Varid{inLTree3}}}
+}
+
 \end{eqnarray*}
 
 
