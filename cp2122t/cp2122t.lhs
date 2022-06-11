@@ -155,7 +155,7 @@
 \\\hline
 a94956 & André Lucena Ribas Ferreira
 \\
-a22222 & Nome2 (preencher)
+a96936 & Carlos Eduardo Da Silva Machado
 \\
 a97485 & Gonçalo Manuel Maia de Sousa
 \end{tabular}
@@ -1139,10 +1139,11 @@ g2 (((x,y),s),n) = i2 ((t1,t2),t3) where
     t3 = (((x,y+ s `div` 2), s `div` 2), n-1)
 \end{code}
 
+Diagramas do catamorfismo e anamorfismo:
 \begin{eqnarray*}
 \xymatrix@@C=2cm{
     |LTree3 Tri|
-           \ar[d]_-{|g1|}
+           \ar[d]_-{|cataLTree3 g1|}
 &
     |Tri + ((Int x Int) x Int)|
            \ar[d]^{|id + ((g1 x g1) x g1)|}
@@ -1153,6 +1154,21 @@ g2 (((x,y),s),n) = i2 ((t1,t2),t3) where
      |Tri + ((Tri* x Tri*), Tri*)|
            \ar[l]^-{|g1|}
 }
+
+\xymatrix@@C=2cm{
+    |Tri x Int|
+           \ar[r]_-{|g2|}
+           \ar[d]_-{|anaLTree3 g2|}
+&
+    |Tri + ((Int x Int) x Int)|
+           \ar[d]^{|id + ((g2 x g2) x g2)|}
+\\
+     |LTree3 Tri|
+&
+     |Tri + ((Tri* x Tri*), Tri*)|
+           \ar[l]^-{|inLTree3|}
+}
+
 \end{eqnarray*}
 
 
