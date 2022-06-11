@@ -1147,9 +1147,9 @@ Diagramas do catamorfismo e anamorfismo:
            \ar[d]^{|id + ((g1 x g1) x g1)|}
            \ar[l]_-{|inLTree3|}
 \\
-     |Tri*|
+     |[Tri]|
 &
-     |Tri + ((Tri* x Tri*), Tri*)|
+     |Tri + (([Tri] x [Tri]), [Tri])|
            \ar[l]^-{|g1|}
 }
 
@@ -1163,7 +1163,7 @@ Diagramas do catamorfismo e anamorfismo:
 \\
      |LTree3 Tri|
 &
-     |Tri + ((Tri* x Tri*), Tri*)|
+     |Tri + (([Tri] x [Tri]), [Tri])|
            \ar[l]^-{|inLTree3|}
 }
 
