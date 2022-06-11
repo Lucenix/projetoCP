@@ -1151,7 +1151,7 @@ Diagramas do catamorfismo e anamorfismo:
     |LTree3 Tri|
            \ar[d]_-{|cataLTree3 g1|}
 &
-    |Tri + ((Int >< Int) >< Int)|
+    |Tri + ((Tri >< Tri) >< Tri)|
            \ar[d]^{|id + ((g1 >< g1) >< g1)|}
            \ar[l]_-{|inLTree3|}
 \\
@@ -1166,7 +1166,7 @@ Diagramas do catamorfismo e anamorfismo:
            \ar[r]_-{|g2|}
            \ar[d]_-{|anaLTree3 g2|}
 &
-    |Tri + ((Int >< Int) >< Int)|
+    |Tri + ((Tri >< Tri) >< Tri)|
            \ar[d]^{|id + ((g2 >< g2) >< g2)|}
 \\
      |LTree3 Tri|
