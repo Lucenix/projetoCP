@@ -1182,6 +1182,15 @@ Diagramas do catamorfismo e anamorfismo:
 Explicação do gene g1:
 Queremos as uma lista com todos os elementos das três listas l1, l2 e l3 que estão curried.
 Portanto, pensamos numa função simples em haskell e passamos para uma pointfree.
+Explicação do gene g2:
+Como se  trata de um anamorfismoLTree3, mas precisar de usar as funções injetoras i1 e i2 por causa do either.
+O segundo elemento do par é a profundidade, se for 0, queremos que imprima o triângulo atual, logo i1 t, sendo t o primeiro elemento
+do par, correspondente à sua informação geométrica, ou seja, do tipo Tri.
+Caso contrário, ainda temos de descer pelo menos mais um nível, e por isso queremos decrementar o segundo elemento e gerar os três
+triângulos filhos, os seus catetos possuem metade do comprimento do pai, logo no segundo elemento do Tri, utilizamos a divisão inteira
+para obter metade do tamanho, o que difere entre eles é a sua posição, o primeiro fica na mesma posição que o pai, só com menor comprimento dos
+catetos. Sendo x o tamanho horizontal e y o tamanho vertical do pai, o segundo estará na posição (x,y+y/2) e o terceiro (x+x/2,y), ressaltando novamente que 
+a operação de divisão é entre inteiros. 
 \begin{eqnarray*}
 \start
      | g1 Tri x = [x] |
