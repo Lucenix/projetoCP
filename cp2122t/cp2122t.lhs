@@ -1180,8 +1180,32 @@ Diagramas do catamorfismo e anamorfismo:
 }
 \end{eqnarray*}
 Explicação do gene g1:
-Queremos as uma lista com todos os elementos das três listas l1, l2 e l3 que estão curried.
+Queremos obter uma lista do tipo Tri a partir de um +, logo o g1 será um either.
+A primeira parte do either é simples, temos apenas um triângulo, logo basta colocar em uma lista através da função singl.
+Para a segunda parte do either, queremos as uma lista com todos os elementos das três listas l1, l2 e l3 que estão curried.
 Portanto, pensamos numa função simples em haskell e passamos para uma pointfree.
+Passagem para pointfree:
+\begin{eqnarray*}
+\start
+     | g1 ((x,y),z) = x ++ y ++ z | 
+%
+\just\equiv{passar ++ de infix para prefix duas vezes}
+%
+     | g1 ((x,y),z) = (++) ((++) x y) z | 
+%
+\just\equiv{(84) duas vezes}
+%
+     | g1 ((x,y),z) = (uncurry ++) ((uncurry ++) (x,y), z) | 
+%
+\just\equiv{(73), (77), (72)}
+%
+     | g1 ((x,y),z) = (uncurry ++) . (uncurry ++ >< id) ((x,y), z) | 
+%
+\just\equiv{(71)}
+%
+     | g1 = (uncurry ++) . (uncurry ++ >< id)| 
+\qed
+\end{eqnarray*}
 Explicação do gene g2:
 Como se  trata de um anamorfismoLTree3, mas precisar de usar as funções injetoras i1 e i2 por causa do either.
 O segundo elemento do par é a profundidade, se for 0, queremos que imprima o triângulo atual, logo i1 t, sendo t o primeiro elemento
@@ -1191,32 +1215,7 @@ triângulos filhos, os seus catetos possuem metade do comprimento do pai, logo n
 para obter metade do tamanho, o que difere entre eles é a sua posição, o primeiro fica na mesma posição que o pai, só com menor comprimento dos
 catetos. Sendo x o tamanho horizontal e y o tamanho vertical do pai, o segundo estará na posição (x,y+y/2) e o terceiro (x+x/2,y), ressaltando novamente que 
 a operação de divisão é entre inteiros. 
-\begin{eqnarray*}
-\start
-     | g1 Tri x = [x] |
-     | g1 ((x,y),z) = x ++ y ++ z | 
-%
-\just\equiv{definição de singl, passar ++ de infix para prefix duas vezes}
-%
-     | g1 Tri x = singl x |
-     | g1 ((x,y),z) = (++) ((++) x y) z | 
-%
-\just\equiv{(71), (72), (84) duas vezes}
-%
-     | g1.Tri = singl |
-     | g1 ((x,y),z) = (uncurry ++) ((uncurry ++) (x,y), z) | 
-%
-\just\equiv{(73), (77), (72)}
-%
-     | g1.Tri = singl |
-     | g1 ((x,y),z) = (uncurry ++) . (uncurry ++ >< id) ((x,y), z) | 
-%
-\just\equiv{(71)}
-%
-     | g1.Tri = singl |
-     | g1 = (uncurry ++) . (uncurry ++ >< id)| 
-\qed
-\end{eqnarray*}
+
 \subsection*{Problema 4}
 
 A função |propagate| tem como objetivo aplicar |f :: Monad m => (t -> m a)| a todos os elementos da lista de entrada, analogamente a um |map|.
