@@ -1179,6 +1179,35 @@ Diagramas do catamorfismo e anamorfismo:
            \ar[l]^-{|inLTree3|}
 }
 \end{eqnarray*}
+Explicação do gene g1:
+Queremos as uma lista com todos os elementos das três listas l1, l2 e l3 que estão curried.
+Portanto, pensamos numa função simples em haskell e passamos para uma pointfree.
+\begin{eqnarray*}
+\start
+     | g1 Tri x = [x] |
+     | g1 ((x,y),z) = x ++ y ++ z | 
+%
+\just\equiv{definição de singl, passar ++ de infix para prefix duas vezes}
+%
+     | g1 Tri x = singl x |
+     | g1 ((x,y),z) = (++) ((++) x y) z | 
+%
+\just\equiv{(71), (72), (84) duas vezes}
+%
+     | g1.Tri = singl |
+     | g1 ((x,y),z) = (uncurry ++) ((uncurry ++) (x,y), z) | 
+%
+\just\equiv{(73), (77), (72)}
+%
+     | g1.Tri = singl |
+     | g1 ((x,y),z) = (uncurry ++) . (uncurry ++ >< id) ((x,y), z) | 
+%
+\just\equiv{(71)}
+%
+     | g1.Tri = singl |
+     | g1 = (uncurry ++) . (uncurry ++ >< id)| 
+\qed
+\end{eqnarray*}
 \subsection*{Problema 4}
 
 A função |propagate| tem como objetivo aplicar |f :: Monad m => (t -> m a)| a todos os elementos da lista de entrada, analogamente a um |map|.
