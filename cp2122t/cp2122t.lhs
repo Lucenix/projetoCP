@@ -1105,7 +1105,7 @@ Como temos um either, vamos ter que usar as funções i1 e i2, no caso de ser um
 , inserimos o par com um par e um elemento, basta inserir os elementos a b c na forma ((a,b),c).
 Resolução do restante:
 As recLTree3, cataLTree3, anaLTree3 e hyloLTree3 são funções iguais às funções de outras bibliotecas e o baseLTree3 foi feito de acordo
-com o tipo, como o bifuntor B(X,Y) = X -|- ((Y >< Y) >< Y), o baseLTree3 f g = f -|- ((g >< g) >< g).
+com o tipo, como o bifuntor |B(X,Y) = X + ((Y >< Y) >< Y)|, o baseLTree3 |f g = f + ((g >< g) >< g)|.
 
 Biblioteca |LTree3|:
 
