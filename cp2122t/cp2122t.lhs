@@ -1092,7 +1092,7 @@ Ficamos então com:
 %
 \just\equiv{both = split a b}
 %
-     |split a b = cataLTree (split (either (id) ((uncurry max).(p2 >< p2))) (either (id) ((uncurry min).(p1 >< p1))))|
+     |both = cataLTree (split (either (id) ((uncurry max).(p2 >< p2))) (either (id) ((uncurry min).(p1 >< p1))))|
 \qed
 \end{eqnarray*}
 
