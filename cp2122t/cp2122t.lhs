@@ -1195,15 +1195,15 @@ Passagem para pointfree:
 %
 \just\equiv{(84) duas vezes}
 %
-     | g1 ((x,y),z) = (uncurry ++) ((uncurry ++) (x,y), z) | 
+     | g1 ((x,y),z) = (uncurry (++)) ((uncurry (++)) (x,y), z) | 
 %
 \just\equiv{(73), (77), (72)}
 %
-     | g1 ((x,y),z) = (uncurry ++) . (uncurry ++ >< id) ((x,y), z) | 
+     | g1 ((x,y),z) = (uncurry (++)) . ((uncurry (++)) >< id) ((x,y), z) | 
 %
 \just\equiv{(71)}
 %
-     | g1 = (uncurry ++) . (uncurry ++ >< id)| 
+     | g1 = (uncurry (++)) . ((uncurry (++)) >< id)| 
 \qed
 \end{eqnarray*}
 Explicação do gene g2:
