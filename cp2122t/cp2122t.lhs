@@ -1132,10 +1132,6 @@ hyloLTree3 f g = cataLTree3 f . anaLTree3 g
 Genes do hilomorfismo |sierpinski|:
 
 O g1 é o gene do catamorfismo e o g2 é o gene do anamorfismo.
-Resolução do g1:
-A partir de um Tri ou ((Tri*, Tri*), Tri*), queremos obter uma lista de Tri (Tri*).
-Se for um tri, queremos colocar em uma lista singular, senão temos fazer a concatenação das três listas de Tri.
-Optamos por escreve a função em haskell pointwise e passar para pointfree.
 
 \begin{code}
 g1 = either singl (uncurry (++) . ((uncurry (++) >< id)))
@@ -1147,23 +1143,7 @@ g2 (((x,y),s),n) = i2 ((t1,t2),t3) where
     t3 = (((x,y+ s `div` 2), s `div` 2), n-1)
 \end{code}
 
-Diagramas do catamorfismo e anamorfismo:
-\begin{eqnarray*}
-\xymatrix@@C=2cm{
-    |LTree3 Tri|
-           \ar[d]_-{|cataLTree3 g1|}
-&
-    |Tri + ((Tri >< Tri) >< Tri)|
-           \ar[d]^{|id + ((g1 >< g1) >< g1)|}
-           \ar[l]_-{|inLTree3|}
-\\
-     |[Tri]|
-&
-     |Tri + (([Tri] >< [Tri]), [Tri])|
-           \ar[l]^-{|g1|}
-}
-
-\end{eqnarray*}
+Diagrama do anamorfismo:
 \begin{eqnarray*}
 \xymatrix@@C=2cm{
     |Tri >< Int|
@@ -1171,7 +1151,7 @@ Diagramas do catamorfismo e anamorfismo:
            \ar[d]_-{|anaLTree3 g2|}
 &
     |Tri + ((Tri >< Tri) >< Tri)|
-           \ar[d]^{|id + ((g2 >< g2) >< g2)|}
+           \ar[d]^{|id + ((|g2| >< |g2|) >< |g2|)|}
 \\
      |LTree3 Tri|
 &
@@ -1179,7 +1159,52 @@ Diagramas do catamorfismo e anamorfismo:
            \ar[l]^-{|inLTree3|}
 }
 \end{eqnarray*}
-Explicação do gene g1:
+
+Diagrama do catamorfismo:
+\begin{eqnarray*}
+\xymatrix@@C=2cm{
+    |LTree3 Tri|
+           \ar[d]_-{|cataLTree3 g1|}
+&
+    |Tri + ((Tri >< Tri) >< Tri)|
+           \ar[d]^{|id + ((|g1| >< |g1|) >< |g1|)|}
+           \ar[l]_-{|inLTree3|}
+\\
+     |[Tri]|
+&
+     |Tri + (([Tri] >< [Tri]), [Tri])|
+           \ar[l]^-{|g1|}
+}
+\end{eqnarray*}
+
+Diagrama do hilomorfismo:
+\begin{eqnarray*}
+\xymatrix@@C=2cm{
+    |Tri >< Int|
+           \ar[r]_-{|g2|}
+           \ar[d]_-{|anaLTree3 g2|}
+&
+    |Tri + ((Tri >< Tri) >< Tri)|
+           \ar[d]^{|id + ((|g2| >< |g2|) >< |g2|)|}
+\\
+     |LTree3 Tri|
+          \ar[d]_-{|cataLTree3 g1|}
+&
+     |Tri + (([Tri] >< [Tri]), [Tri])|
+           \ar[l]^-{|inLTree3|}
+           \ar[d]^{|id + ((|g1| >< |g1|) >< |g1|)|}
+\\
+     |[Tri]|
+&
+     |Tri + (([Tri] >< [Tri]), [Tri])|
+           \ar[l]^-{|g1|}
+}
+\end{eqnarray*}
+
+Resolução do g1:
+A partir de um Tri ou ((Tri*, Tri*), Tri*), queremos obter uma lista de Tri (Tri*).
+Se for um tri, queremos colocar em uma lista singular, senão temos fazer a concatenação das três listas de Tri.
+Optamos por escreve a função em haskell pointwise e passar para pointfree.
 Queremos obter uma lista do tipo Tri a partir de um +, logo o g1 será um either.
 A primeira parte do either é simples, temos apenas um triângulo, logo basta colocar em uma lista através da função singl.
 Para a segunda parte do either, queremos as uma lista com todos os elementos das três listas l1, l2 e l3 que estão curried.
@@ -1206,7 +1231,7 @@ Passagem para pointfree:
      | g1 = (uncurry (++)) . ((uncurry (++)) >< id)| 
 \qed
 \end{eqnarray*}
-Explicação do gene g2:
+Resolução do gene g2:
 Como se  trata de um anamorfismoLTree3, mas precisar de usar as funções injetoras i1 e i2 por causa do either.
 O segundo elemento do par é a profundidade, se for 0, queremos que imprima o triângulo atual, logo i1 t, sendo t o primeiro elemento
 do par, correspondente à sua informação geométrica, ou seja, do tipo Tri.

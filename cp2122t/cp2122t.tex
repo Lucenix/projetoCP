@@ -1422,10 +1422,6 @@ Biblioteca \ensuremath{\mathsf{LTree3}}:
 Genes do hilomorfismo \ensuremath{\Varid{sierpinski}}:
 
 O g1 é o gene do catamorfismo e o g2 é o gene do anamorfismo.
-Resolução do g1:
-A partir de um Tri ou ((Tri*, Tri*), Tri*), queremos obter uma lista de Tri (Tri*).
-Se for um tri, queremos colocar em uma lista singular, senão temos fazer a concatenação das três listas de Tri.
-Optamos por escreve a função em haskell pointwise e passar para pointfree.
 
 \begin{hscode}\SaveRestoreHook
 \column{B}{@{}>{\hspre}l<{\hspost}@{}}%
@@ -1448,23 +1444,7 @@ Optamos por escreve a função em haskell pointwise e passar para pointfree.
 \ColumnHook
 \end{hscode}\resethooks
 
-Diagramas do catamorfismo e anamorfismo:
-\begin{eqnarray*}
-\xymatrix@C=2cm{
-    \ensuremath{\mathsf{LTree3}\;\Conid{Tri}}
-           \ar[d]_-{\ensuremath{\Varid{cataLTree3}\;g_1 }}
-&
-    \ensuremath{\Conid{Tri}\mathbin{+}((\Conid{Tri}\times\Conid{Tri})\times\Conid{Tri})}
-           \ar[d]^{\ensuremath{\Varid{id}\mathbin{+}((g_1 \timesg_1 )\timesg_1 )}}
-           \ar[l]_-{\ensuremath{\Varid{inLTree3}}}
-\\
-     \ensuremath{[\mskip1.5mu \Conid{Tri}\mskip1.5mu]}
-&
-     \ensuremath{\Conid{Tri}\mathbin{+}(([\mskip1.5mu \Conid{Tri}\mskip1.5mu]\times[\mskip1.5mu \Conid{Tri}\mskip1.5mu]),[\mskip1.5mu \Conid{Tri}\mskip1.5mu])}
-           \ar[l]^-{\ensuremath{g_1 }}
-}
-
-\end{eqnarray*}
+Diagrama do anamorfismo:
 \begin{eqnarray*}
 \xymatrix@C=2cm{
     \ensuremath{\Conid{Tri}\times\Conid{Int}}
@@ -1472,7 +1452,7 @@ Diagramas do catamorfismo e anamorfismo:
            \ar[d]_-{\ensuremath{\Varid{anaLTree3}\;g_2 }}
 &
     \ensuremath{\Conid{Tri}\mathbin{+}((\Conid{Tri}\times\Conid{Tri})\times\Conid{Tri})}
-           \ar[d]^{\ensuremath{\Varid{id}\mathbin{+}((g_2 \timesg_2 )\timesg_2 )}}
+           \ar[d]^{\ensuremath{\Varid{id}\mathbin{+}((}g2\ensuremath{\times}g2\ensuremath{)\times}g2\ensuremath{)}}
 \\
      \ensuremath{\mathsf{LTree3}\;\Conid{Tri}}
 &
@@ -1480,7 +1460,52 @@ Diagramas do catamorfismo e anamorfismo:
            \ar[l]^-{\ensuremath{\Varid{inLTree3}}}
 }
 \end{eqnarray*}
-Explicação do gene g1:
+
+Diagrama do catamorfismo:
+\begin{eqnarray*}
+\xymatrix@C=2cm{
+    \ensuremath{\mathsf{LTree3}\;\Conid{Tri}}
+           \ar[d]_-{\ensuremath{\Varid{cataLTree3}\;g_1 }}
+&
+    \ensuremath{\Conid{Tri}\mathbin{+}((\Conid{Tri}\times\Conid{Tri})\times\Conid{Tri})}
+           \ar[d]^{\ensuremath{\Varid{id}\mathbin{+}((}g1\ensuremath{\times}g1\ensuremath{)\times}g1\ensuremath{)}}
+           \ar[l]_-{\ensuremath{\Varid{inLTree3}}}
+\\
+     \ensuremath{[\mskip1.5mu \Conid{Tri}\mskip1.5mu]}
+&
+     \ensuremath{\Conid{Tri}\mathbin{+}(([\mskip1.5mu \Conid{Tri}\mskip1.5mu]\times[\mskip1.5mu \Conid{Tri}\mskip1.5mu]),[\mskip1.5mu \Conid{Tri}\mskip1.5mu])}
+           \ar[l]^-{\ensuremath{g_1 }}
+}
+\end{eqnarray*}
+
+Diagrama do hilomorfismo:
+\begin{eqnarray*}
+\xymatrix@C=2cm{
+    \ensuremath{\Conid{Tri}\times\Conid{Int}}
+           \ar[r]_-{\ensuremath{g_2 }}
+           \ar[d]_-{\ensuremath{\Varid{anaLTree3}\;g_2 }}
+&
+    \ensuremath{\Conid{Tri}\mathbin{+}((\Conid{Tri}\times\Conid{Tri})\times\Conid{Tri})}
+           \ar[d]^{\ensuremath{\Varid{id}\mathbin{+}((}g2\ensuremath{\times}g2\ensuremath{)\times}g2\ensuremath{)}}
+\\
+     \ensuremath{\mathsf{LTree3}\;\Conid{Tri}}
+          \ar[d]_-{\ensuremath{\Varid{cataLTree3}\;g_1 }}
+&
+     \ensuremath{\Conid{Tri}\mathbin{+}(([\mskip1.5mu \Conid{Tri}\mskip1.5mu]\times[\mskip1.5mu \Conid{Tri}\mskip1.5mu]),[\mskip1.5mu \Conid{Tri}\mskip1.5mu])}
+           \ar[l]^-{\ensuremath{\Varid{inLTree3}}}
+           \ar[d]^{\ensuremath{\Varid{id}\mathbin{+}((}g1\ensuremath{\times}g1\ensuremath{)\times}g1\ensuremath{)}}
+\\
+     \ensuremath{[\mskip1.5mu \Conid{Tri}\mskip1.5mu]}
+&
+     \ensuremath{\Conid{Tri}\mathbin{+}(([\mskip1.5mu \Conid{Tri}\mskip1.5mu]\times[\mskip1.5mu \Conid{Tri}\mskip1.5mu]),[\mskip1.5mu \Conid{Tri}\mskip1.5mu])}
+           \ar[l]^-{\ensuremath{g_1 }}
+}
+\end{eqnarray*}
+
+Resolução do g1:
+A partir de um Tri ou ((Tri*, Tri*), Tri*), queremos obter uma lista de Tri (Tri*).
+Se for um tri, queremos colocar em uma lista singular, senão temos fazer a concatenação das três listas de Tri.
+Optamos por escreve a função em haskell pointwise e passar para pointfree.
 Queremos obter uma lista do tipo Tri a partir de um +, logo o g1 será um either.
 A primeira parte do either é simples, temos apenas um triângulo, logo basta colocar em uma lista através da função singl.
 Para a segunda parte do either, queremos as uma lista com todos os elementos das três listas l1, l2 e l3 que estão curried.
@@ -1507,7 +1532,7 @@ Passagem para pointfree:
      \ensuremath{g_1 \mathrel{=}\uncurry{(\mathbin{+\!\!\!+})}\comp (\uncurry{(\mathbin{+\!\!\!+})}\times\Varid{id})} 
 \qed
 \end{eqnarray*}
-Explicação do gene g2:
+Resolução do gene g2:
 Como se  trata de um anamorfismoLTree3, mas precisar de usar as funções injetoras i1 e i2 por causa do either.
 O segundo elemento do par é a profundidade, se for 0, queremos que imprima o triângulo atual, logo i1 t, sendo t o primeiro elemento
 do par, correspondente à sua informação geométrica, ou seja, do tipo Tri.
