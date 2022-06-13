@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.3) (preloaded format=pdflatex 2022.6.11)  13 JUN 2022 11:09
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.3) (preloaded format=pdflatex 2022.6.11)  13 JUN 2022 18:00
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -778,7 +778,7 @@ Try to go on, since this might almost work.
 
  [12]
 ! Undefined control sequence.
-l.1372 \codificado
+l.1376 \codificado
                    em Haskell:
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -796,21 +796,21 @@ and I'll forget about whatever was undefined.
  <xymatrix 2x2 191> <xymatrix 2x2 191> <xymatrix 2x3 328> [14]
 \openout5 = `cp2122t.ptb'.
 
- <xymatrix
-2x3 278>
+ [15]
+<xymatrix 2x3 278>
 \openout5 = `cp2122t.ptb'.
 
- [15]
-
-LaTeX Warning: Command \c invalid in math mode on input line 1647.
 
 
-LaTeX Warning: Command \~ invalid in math mode on input line 1647.
+LaTeX Warning: Command \c invalid in math mode on input line 1666.
+
+
+LaTeX Warning: Command \~ invalid in math mode on input line 1666.
 
 ! Please use \mathaccent for accents in math mode.
 \add@accent ... \let \ignorespaces \relax \accent 
                                                   #1 #2\egroup \ifmmode \els...
-l.1647 ...suremath{\Varid{absorção}\mathbin{-+}}
+l.1666 ...suremath{\Varid{absorção}\mathbin{-+}}
                                                   .
 I'm changing \accent to \mathaccent here; wish me luck.
 (Accents are not the same in formulas as they are in text.)
@@ -820,19 +820,19 @@ I'm changing \accent to \mathaccent here; wish me luck.
 
 \openout5 = `cp2122t.ptb'.
 
- (cp2122t.ind [16] [17
+ [16] (cp2122t.ind [17] [18
 
 
-]) (cp2122t.bbl) [18
+]) (cp2122t.bbl) [19
 
 ] (cp2122t.aux)
 Package rerunfilecheck Info: File `cp2122t.out' has not changed.
 (rerunfilecheck)             Checksum: 7ECA9E1EF440DD2F0858BE0D2D0FD343;1719.
  ) 
 Here is how much of TeX's memory you used:
- 17388 strings out of 478614
- 267085 string characters out of 2860003
- 637673 words of memory out of 3000000
+ 17389 strings out of 478614
+ 267092 string characters out of 2860003
+ 638673 words of memory out of 3000000
  35103 multiletter control sequences out of 15000+600000
  513256 words of font info for 157 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -859,9 +859,9 @@ uplb8a.pfb><D:/latex/fonts/type1/urw/palatino/uplbi8a.pfb><D:/latex/fonts/type1
 /urw/palatino/uplr8a.pfb><D:/latex/fonts/type1/urw/palatino/uplr8a.pfb><D:/late
 x/fonts/type1/urw/palatino/uplri8a.pfb><D:/latex/fonts/type1/public/xypic/xyati
 p10.pfb><D:/latex/fonts/type1/public/xypic/xybtip10.pfb>
-Output written on cp2122t.pdf (18 pages, 847007 bytes).
+Output written on cp2122t.pdf (19 pages, 848369 bytes).
 PDF statistics:
- 446 PDF objects out of 1000 (max. 8388607)
- 69 named destinations out of 1000 (max. 500000)
+ 451 PDF objects out of 1000 (max. 8388607)
+ 70 named destinations out of 1000 (max. 500000)
  80 words of extra memory for PDF output out of 10000 (max. 10000000)
 
