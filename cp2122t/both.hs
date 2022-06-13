@@ -36,6 +36,15 @@ t2 = Fork (
                 Fork (Leaf 33,Leaf 79))))
 res2 = (39,70)
 
+alice :: Ord c => LTree c -> c
+alice (Leaf x) = id x
+alice (Fork (t1,t2)) = ((uncurry max).(bob >< bob)) (t1,t2)
+
+bob :: Ord c => LTree c -> c
+bob (Leaf x) = id x
+bob (Fork (t1,t2)) = ((uncurry min).(alice >< alice)) (t1,t2)
+
+
 
 both :: LTree Integer -> (Integer, Integer)
 both x = cataLTree (split (either id (uncurry max.(p2 >< p2))) (either id (uncurry min.(p1 >< p1)))) x

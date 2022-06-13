@@ -1030,6 +1030,12 @@ bob (Fork (t1,t2)) = ((uncurry min).(alice >< alice)) (t1,t2)
 Procuramos agora manipular estas definições para que seja possivel aplicar a lei |Fokkinga|.
 \begin{eqnarray*}
 \start
+     |lcbr(a (leaf x) = id x)
+          (a (Fork (t1,t2)) = (uncurry max) (b >< b) (t1,t2))
+     |
+%
+\just\equiv{(72)}
+%
      |lcbr(a.leaf x = id x)
           (a.Fork (t1,t2) = (uncurry max) (b >< b) (t1,t2))
      |
