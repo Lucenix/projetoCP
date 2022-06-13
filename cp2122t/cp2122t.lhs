@@ -1209,26 +1209,27 @@ Queremos obter uma lista do tipo Tri a partir de um +, logo o g1 será um either
 A primeira parte do either é simples, temos apenas um triângulo, logo basta colocar em uma lista através da função singl.
 Para a segunda parte do either, queremos as uma lista com todos os elementos das três listas l1, l2 e l3 que estão curried.
 Portanto, pensamos numa função simples em haskell e passamos para uma pointfree.
+Sendo g1', o correspondente à segunda parte do either. 
 Passagem para pointfree:
 \begin{eqnarray*}
 \start
-     | g1 ((x,y),z) = x ++ y ++ z | 
+     | g1' ((x,y),z) = x ++ y ++ z | 
 %
 \just\equiv{passar ++ de infix para prefix duas vezes}
 %
-     | g1 ((x,y),z) = (++) ((++) x y) z | 
+     | g1' ((x,y),z) = (++) ((++) x y) z | 
 %
 \just\equiv{(84) duas vezes}
 %
-     | g1 ((x,y),z) = (uncurry (++)) ((uncurry (++)) (x,y), z) | 
+     | g1' ((x,y),z) = (uncurry (++)) ((uncurry (++)) (x,y), z) | 
 %
 \just\equiv{(73), (77), (72)}
 %
-     | g1 ((x,y),z) = (uncurry (++)) . ((uncurry (++)) >< id) ((x,y), z) | 
+     | g1' ((x,y),z) = (uncurry (++)) . ((uncurry (++)) >< id) ((x,y), z) | 
 %
 \just\equiv{(71)}
 %
-     | g1 = (uncurry (++)) . ((uncurry (++)) >< id)| 
+     | g1' = (uncurry (++)) . ((uncurry (++)) >< id)| 
 \qed
 \end{eqnarray*}
 Resolução do gene g2:
