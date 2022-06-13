@@ -1628,7 +1628,7 @@ isto é, aplicar \ensuremath{\Varid{return}} após \ensuremath{\Varid{nil}} ao e
 \\
 &
     \ensuremath{\mathrm{1}\mathbin{+}\Conid{M}\;\mathit B\times\Conid{M}\;[\mskip1.5mu \mathit B\mskip1.5mu]}
-          \ar[ul]^{\ensuremath{\alt{\Varid{return}\comp \Varid{nil}}{g_1 }}}
+          \ar[ul]^{\ensuremath{\alt{\Varid{return}\comp \Varid{nil}}{\Varid{monad\char95 cons}}}}
 }
 \end{eqnarray*}
 
@@ -1660,7 +1660,7 @@ A sequência de aplicações do gene, que manipulam a cabeça da lista, é a seg
 \item Reduzir \ensuremath{\Varid{m}\;\Conid{Bit3}} a \ensuremath{\Varid{m}\;\Conid{Bit}}, utilizando a função \ensuremath{v_3 \mathbin{::}\Conid{Bit3}\to \Conid{Bit}} estendida para se 
 aplicar a \ensuremath{\Varid{m}\;\Conid{Bit3}} com o \ensuremath{\Varid{functor}} desse mónade, através de \ensuremath{\mathsf{fmap}}.
 \item Reconstruir \ensuremath{\Varid{m}\;[\mskip1.5mu \Conid{Bit}\mskip1.5mu]} de forma análoga a \ensuremath{\Varid{propagate}}, através de
-\ensuremath{\alt{\Varid{return}\comp \Varid{nil}}{g_1 \;\Varid{f}}}.
+\ensuremath{\alt{\Varid{return}\comp \Varid{nil}}{\Varid{monad\char95 cons}\;\Varid{f}}}.
 \end{enumerate}
 
 Tal como anteriormente, todos estes passos podem ser compostos com \ensuremath{g_1 } numa só função por sucessivas aplicações da regra de \ensuremath{\Varid{absorção}\mathbin{-+}}.
@@ -1690,7 +1690,7 @@ Tal como anteriormente, todos estes passos podem ser compostos com \ensuremath{g
 \\
 &
     \ensuremath{\mathrm{1}\mathbin{+}\Conid{M}\;\Conid{Bit}\times\Conid{M}\;[\mskip1.5mu \Conid{Bit}\mskip1.5mu]}
-            \ar[uuul]^{\ensuremath{\alt{\Varid{return}\comp \Varid{nil}}{g_1 }}}
+            \ar[uuul]^{\ensuremath{\alt{\Varid{return}\comp \Varid{nil}}{\Varid{monad\char95 cons}}}}
 }
 \end{eqnarray*}
 

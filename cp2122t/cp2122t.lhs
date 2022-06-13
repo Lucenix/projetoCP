@@ -1325,7 +1325,7 @@ isto é, aplicar |return| após |nil| ao elemento |()|.
 \\
 &
     |1 + M B >< M [B]|
-          \ar[ul]^{|either (return . nil) (g1)|}
+          \ar[ul]^{|either (return . nil) (monad_cons)|}
 }
 \end{eqnarray*}
 
@@ -1348,7 +1348,7 @@ A sequência de aplicações do gene, que manipulam a cabeça da lista, é a seg
 \item Reduzir |m Bit3| a |m Bit|, utilizando a função |v3 :: Bit3 -> Bit| estendida para se 
 aplicar a |m Bit3| com o |functor| desse mónade, através de |fmap|.
 \item Reconstruir |m [Bit]| de forma análoga a |propagate|, através de
-|either (return . nil) (g1 f)|.
+|either (return . nil) (monad_cons f)|.
 \end{enumerate}
 
 Tal como anteriormente, todos estes passos podem ser compostos com |g1| numa só função por sucessivas aplicações da regra de |absorção-+|.
@@ -1378,7 +1378,7 @@ Tal como anteriormente, todos estes passos podem ser compostos com |g1| numa só
 \\
 &
     |1 + M Bit >< M [Bit]|
-            \ar[uuul]^{|either (return . nil) (g1)|}
+            \ar[uuul]^{|either (return . nil) (monad_cons)|}
 }
 \end{eqnarray*}
 
