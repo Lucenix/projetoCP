@@ -1380,6 +1380,15 @@ Ficamos então com:
 \end{hscode}\resethooks
 
 \subsection*{Problema 3}
+Resolução do in:
+Como Nodo é curried e queremos passar para um par com um par e um elemento, temos de fazer uncurry após uncurry,
+uma LTree3 por definição ou é apenas um Tri ou é um Nodo Tri Tri Tri, logo usamos um either.
+Resolução do out:
+Como temos um either, vamos ter que usar as funções i1 e i2, no caso de ser um Tri basta inserir i1 t, no caso de ser um Nodo de 3 Tri
+, inserimos o par com um par e um elemento, basta inserir os elementos a b c na forma ((a,b),c).
+Resolução do restante:
+As recLTree3, cataLTree3, anaLTree3 e hyloLTree3 são funções iguais às funções de outras bibliotecas e o baseLTree3 foi feito de acordo
+com o tipo, como o bifuntor B(X,Y) = X -\ensuremath{\mathbin{-}((\Conid{Y}\times\Conid{Y})\times\Conid{Y}),\Varid{o}\;\Varid{baseLTree3}\;\Varid{f}\;\Varid{g}\mathrel{=}\Varid{f}\mathbin{-}}- ((g >< g) >< g).
 
 Biblioteca \ensuremath{\mathsf{LTree3}}:
 
@@ -1411,6 +1420,7 @@ Biblioteca \ensuremath{\mathsf{LTree3}}:
 \end{hscode}\resethooks
 
 Genes do hilomorfismo \ensuremath{\Varid{sierpinski}}:
+
 O g1 é o gene do catamorfismo e o g2 é o gene do anamorfismo.
 Resolução do g1:
 A partir de um Tri ou ((Tri*, Tri*), Tri*), queremos obter uma lista de Tri (Tri*).
@@ -1444,33 +1454,32 @@ Diagramas do catamorfismo e anamorfismo:
     \ensuremath{\mathsf{LTree3}\;\Conid{Tri}}
            \ar[d]_-{\ensuremath{\Varid{cataLTree3}\;g_1 }}
 &
-    \ensuremath{\Conid{Tri}\mathbin{+}((\Conid{Int}\;\Varid{x}\;\Conid{Int})\;\Varid{x}\;\Conid{Int})}
-           \ar[d]^{\ensuremath{\Varid{id}\mathbin{+}((g_1 \;\Varid{x}\;g_1 )\;\Varid{x}\;g_1 )}}
+    \ensuremath{\Conid{Tri}\mathbin{+}((\Conid{Tri}\times\Conid{Tri})\times\Conid{Tri})}
+           \ar[d]^{\ensuremath{\Varid{id}\mathbin{+}((g_1 \timesg_1 )\timesg_1 )}}
            \ar[l]_-{\ensuremath{\Varid{inLTree3}}}
 \\
      \ensuremath{[\mskip1.5mu \Conid{Tri}\mskip1.5mu]}
 &
-     \ensuremath{\Conid{Tri}\mathbin{+}(([\mskip1.5mu \Conid{Tri}\mskip1.5mu]\;\Varid{x}\;[\mskip1.5mu \Conid{Tri}\mskip1.5mu]),[\mskip1.5mu \Conid{Tri}\mskip1.5mu])}
+     \ensuremath{\Conid{Tri}\mathbin{+}(([\mskip1.5mu \Conid{Tri}\mskip1.5mu]\times[\mskip1.5mu \Conid{Tri}\mskip1.5mu]),[\mskip1.5mu \Conid{Tri}\mskip1.5mu])}
            \ar[l]^-{\ensuremath{g_1 }}
 }
 
+\end{eqnarray*}
+\begin{eqnarray*}
 \xymatrix@C=2cm{
-    \ensuremath{\Conid{Tri}\;\Varid{x}\;\Conid{Int}}
+    \ensuremath{\Conid{Tri}\times\Conid{Int}}
            \ar[r]_-{\ensuremath{g_2 }}
            \ar[d]_-{\ensuremath{\Varid{anaLTree3}\;g_2 }}
 &
-    \ensuremath{\Conid{Tri}\mathbin{+}((\Conid{Int}\;\Varid{x}\;\Conid{Int})\;\Varid{x}\;\Conid{Int})}
-           \ar[d]^{\ensuremath{\Varid{id}\mathbin{+}((g_2 \;\Varid{x}\;g_2 )\;\Varid{x}\;g_2 )}}
+    \ensuremath{\Conid{Tri}\mathbin{+}((\Conid{Tri}\times\Conid{Tri})\times\Conid{Tri})}
+           \ar[d]^{\ensuremath{\Varid{id}\mathbin{+}((g_2 \timesg_2 )\timesg_2 )}}
 \\
      \ensuremath{\mathsf{LTree3}\;\Conid{Tri}}
 &
-     \ensuremath{\Conid{Tri}\mathbin{+}(([\mskip1.5mu \Conid{Tri}\mskip1.5mu]\;\Varid{x}\;[\mskip1.5mu \Conid{Tri}\mskip1.5mu]),[\mskip1.5mu \Conid{Tri}\mskip1.5mu])}
+     \ensuremath{\Conid{Tri}\mathbin{+}(([\mskip1.5mu \Conid{Tri}\mskip1.5mu]\times[\mskip1.5mu \Conid{Tri}\mskip1.5mu]),[\mskip1.5mu \Conid{Tri}\mskip1.5mu])}
            \ar[l]^-{\ensuremath{\Varid{inLTree3}}}
 }
-
 \end{eqnarray*}
-
-
 \subsection*{Problema 4}
 
 A função \ensuremath{\Varid{propagate}} tem como objetivo aplicar \ensuremath{\Varid{f}\mathbin{::}\Conid{Monad}\;\Varid{m}\Rightarrow (\Varid{t}\to \Varid{m}\;\Varid{a})} a todos os elementos da lista de entrada, analogamente a um \ensuremath{\map }.
